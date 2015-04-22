@@ -7,7 +7,7 @@
     </head>
     
     <body>
-        
+        <p>Some text</p>
         <?php
             echo "PHP";
             //start the session
