@@ -6,18 +6,29 @@
  * and open the template in the editor.
  */
 
-$connection = new PDO('mysql:host=localhost;dbname=BibMan', "root", "");
+
+
+    $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+
 
 /*
-function retrieveName(){
-    try{
-        $conn = new PDO('mysql:host=localhost;dbname=bibliographyman', "root", "");
-        $query = $conn->prepare("SELECT * FROM user");
-        $query->execute();
-        return $query->fetchAll();
-    } catch(PDOException $e){
-        echo $e->getMessage();
-    }    
-}*/
+$server =  "tcp:bujl4riquq.database.windows.net";
+$user = "steebi";
+$pwd = "iop456!!";
+$db = "BibMan";
+
+try {
+	$conn = new PDO ( "sqlsrv:server = tcp:bujl4riquq.database.windows.net,1433; Database = BibMan", "steebi", "iop456!!");
+	$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    }	catch ( PDOException $e ) {
+	print( "Error connecting to SQL Server." );
+	die(print_r($e));
+    }
+*/
+
+//$connection = new PDO('mysql:host=localhost;dbname=BibMan', "root", "");
+
+/*
+
 
 ?>
