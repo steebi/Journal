@@ -74,7 +74,7 @@ if(isset($_SESSION['error'])){
         echo $e->getMessage();
     }
     
-    echo "Mailing now!!!!".$email;
+    echo "Mailing now please check your inbox! at ".$email;
     
     //if data was successfully inserted then send a confirmation email
     if($SuccessfulInsert){
