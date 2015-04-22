@@ -93,15 +93,15 @@ if(isset($_SESSION['error'])){
             echo "Cannot send confirmation link to email!";
         }*/
         
-        $sendgrid = new SendGrid($api_user, $api_key);
-        $email    = new SendGrid\Email();
+        $sendgrid = new SendGrid('azure_12a7e2a8cb4ba4036b8b5975631939ad@azure.com', 'Your Password');
+        $mymail    = new SendGridMail();
 
-        $email->addTo($to)
+        $mymail->addTo($to)
               ->setFrom("someMail@example.com")
               ->setSubject($subject)
               ->setText($body);
 
-        $sendgrid->send($email);
+        $sendgrid->smtp->send($mymail);
         
     } 
 }
