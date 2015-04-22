@@ -9,7 +9,7 @@
 //access any sessions saved
 session_start();
 
-include('database.php');
+include('index.php');
 //examine the input data to see if it is empty
 if(filter_input(INPUT_POST, 'username') == ''){
     $_SESSION['error']['username'] = "User Name is required.";

@@ -9,6 +9,7 @@
     <body>
         
         <?php
+            echo "PHP";
             //start the session
             session_start();
             include('database.php');
