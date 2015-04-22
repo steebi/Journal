@@ -7,11 +7,11 @@
     </head>
     
     <body>
-        <p>Some text</p>
         <?php
-            echo "PHP";
+            
             //start the session
             session_start();
+            echo "PHP";
             include('database.php');
             //If an error was passed in session print the error message recorded
             if(isset($_SESSION['error'])){
