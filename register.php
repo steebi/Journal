@@ -87,11 +87,22 @@ if(isset($_SESSION['error'])){
         
         //$sendEmail = mail($to, $subject, $body, $header);
         
-        if(mail($to, $subject, $body, $header)){
+        /*if(mail($to, $subject, $body, $header)){
             echo "Confirmation has been sent!";
         }   else{
             echo "Cannot send confirmation link to email!";
-        }
+        }*/
+        
+        $sendgrid = new SendGrid($api_user, $api_key);
+        $email    = new SendGrid\Email();
+
+        $email->addTo($to)
+              ->setFrom("someMail@example.com")
+              ->setSubject($subject)
+              ->setText($body);
+
+        $sendgrid->send($email);
+        
     } 
 }
 
