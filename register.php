@@ -1,110 +1,65 @@
-<?php
+<!DOCTYPE html>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-//access any sessions saved
-session_start();
-
-include('index.php');
-//examine the input data to see if it is empty
-if(filter_input(INPUT_POST, 'username') == ''){
-    $_SESSION['error']['username'] = "User Name is required.";
-}
-if(filter_input(INPUT_POST, 'email') == ''){
-    $_SESSION['error']['email'] = "Email is required.";
-}
-if(filter_input(INPUT_POST, 'password') == ''){
-    $_SESSION['error']['password'] = "Password is required.";
-}
-//Now that all fields are confirmed to be non-null validate the email for
-//the correct form and also to ensure it is not in use already
-if(filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)){
-    try{
-        $email = filter_input(INPUT_POST, 'email');
-        $doesEmailExist = $connection->prepare("SELECT * FROM user WHERE email = :email;");
-        $doesEmailExist->bindParam(':email', $email);
-        $doesEmailExist->execute();
-
-        if(count($doesEmailExist->fetchAll())>0){
-            $_SESSION['error']['email'] = "This Email is already in use!";
-        }
-    }   catch (PDOException $e) {
-        echo $e->getMessage();
-    }
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="registerStyles.css">
+        <title>BibMan</title>
+    </head>
     
-}   else{
-    //if the format is not a valid email format return an error
-    $_SESSION['error']['email'] = "This is not a valid email";
-}
-
-//ensures there are no special characters in the username
-if (preg_match('/[^A-Za-z0-9]/', filter_input(INPUT_POST, 'username')))
-{
-  $_SESSION['error']['username'] = "No special characters allowed";
-}
-
-
-//Now that the input has been validated if there is an error the user will be 
-////stopped and redirected back to the register page with an error
-
-if(isset($_SESSION['error'])){
-    header("Location: index.php");
-    exit;
-}   else{
-    
-    $username = filter_input(INPUT_POST, 'username');
-    $email = filter_input(INPUT_POST, 'email');
-    $password = filter_input(INPUT_POST, 'password');
-    //creates the MD5 hash of a string
-    $reg_code = md5(uniqid(rand()));
-    
-    try{
-        $sqlInsert = $connection->prepare("INSERT INTO user VALUES (:email, :password, :username, :reg_code);");
-
-        $sqlInsert->bindParam(':email', $email);
-        $sqlInsert->bindParam(':password', $password);
-        $sqlInsert->bindParam(':username', $username);
-        $sqlInsert->bindParam(':reg_code', $reg_code);
-        $SuccessfulInsert = $sqlInsert->execute();
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-    
-    echo "Mailing now please check your inbox! at ".$email;
-    
-    //if data was successfully inserted then send a confirmation email
-    if($SuccessfulInsert){
-
-        $to = $email;
-        $subject = "Confirmation from BibMan";
-        $body = "Hey $username you have almost completed creating your BibMan account.";
-        $body .= " All you need to do is click the link below and verify your account!\n\n";
-        $body .= "http://localhost/BibTex/confirm.php?RegCode=$reg_code";
+    <body>
+        <?php
+            //load the session data if there is any
+            session_start();
+            include('database.php');
+        ?>
         
-        //$sendEmail = mail($to, $subject, $body, $header);
         
-        /*if(mail($to, $subject, $body, $header)){
-            echo "Confirmation has been sent!";
-        }   else{
-            echo "Cannot send confirmation link to email!";
-        }*/
+        <div id="header" >
+            <span class="first-command-header"><a href="index.php">Login</a></span>&nbsp;|&nbsp;<span><a href="register.php">Register</a></span>
+            <span class="right">BibMan!</span>
+        </div>
         
-        $sendgrid = new SendGrid('azure_12a7e2a8cb4ba4036b8b5975631939ad@azure.com', 'Your Password');
-        $mymail    = new SendGridMail();
+        <div id = "signup-form" class = "centerForm">
+            <h2>Sign up to BibMan!</h2>
+            <p>Enter your details below</p>
+            <form action="registerControls.php" method='post'>
+                <p>
+                    <label for='username'>User name:</label></br>
+                    <input name = 'username' type='text' id='username'size='40'/>
+                </p>
+                <p>
+                    <label for='email'>Email address:</label></br>
+                    <input name = 'email' type='text' id='email'size='40'/>
+                </p>
+                <p>
+                    <label for='password'>Password:</label></br>
+                    <input name = 'password' type='password' id='password'size='40'/>
+                </p>
+                <p class="errors">
+                    <?php
+                        //If an error was passed in session print the error message recorded
+                        if(isset($_SESSION['error'])){
+                            if(isset($_SESSION['error']['username'])){
+                                echo '<p>'.$_SESSION['error']['username'].'</p>';
+                            }
+                            if(isset($_SESSION['error']['email'])){
+                                echo '<p>'.$_SESSION['error']['email'].'</p>';
+                            }
+                            if(isset($_SESSION['error']['password'])){
+                            echo '<p>'.$_SESSION['error']['password'].'</p>';
+                            }
 
-        $mymail->addTo($to)
-              ->setFrom("someMail@example.com")
-              ->setSubject($subject)
-              ->setText($body);
-
-        $sendgrid->smtp->send($mymail);
+                            //unset the error session variable
+                            unset($_SESSION['error']);
+                        }
+                    ?>
+                </p>
+                <p>
+                    <input name='submit' type='submit' value='Submit'/>
+                </p>
+            </form>
+        </div>
         
-    } 
-}
-
-
-?>
+    </body>
+</html>

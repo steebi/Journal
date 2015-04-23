@@ -5,8 +5,8 @@
 */
 
  CREATE TABLE IF NOT EXISTS user(
-   email VARCHAR(100) NOT NULL,
-   password VARCHAR(100) NOT NULL UNIQUE,
+   email VARCHAR(100) NOT NULL UNIQUE,
+   password VARCHAR(100) NOT NULL,
    userName VARCHAR(40) NOT NULL,
    reg_code VARCHAR( 255 ) default NULL,
    PRIMARY KEY ( email )
