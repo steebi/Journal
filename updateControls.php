@@ -92,7 +92,7 @@
             
             //Now the fields have been assigned if the email is set then test it to see
             //it is of the correct form. Then check it is not already in use.
-            if($changeMail && filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)){
+            if(isset($_POST['changeEmail']) && filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)){
                 try{
                     //checks if the email already exists in the DB and doesn't accept it if it does
                     $email = filter_input(INPUT_POST, 'email');
