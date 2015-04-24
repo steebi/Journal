@@ -72,6 +72,7 @@ and open the template in the editor.
 
                             //unset the error session variable
                             unset($_SESSION['error']);
+                            $message = $_SESSION['error']['login'];
                         }
                     ?>
                 </p>
