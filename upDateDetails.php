@@ -46,7 +46,7 @@ and open the template in the editor.
                     <input name = 'password' type='password' id='password'size='40'/>
                 </p>
                 <p>
-                    <label for='confirmPassword' class='checkboxlabel'>Retype password:</label>></br>
+                    <label for='confirmPassword' class='checkboxlabel'>Retype password:</label></br>
                     <input name='confirmPassword' type='password' id='confirmPassword' size='40'/>
                 </p>
                 <p>

@@ -17,7 +17,8 @@
             //These strings will be used to update the fields that need to be changed in the database
             //values will store the variables that need to be updated, the others will store the value
             //to be passed to the update statement
-            $values = "";
+            $updateString = array();
+            $updateValues = array();
             $username = "";
             $email = "";
             $password = "";
@@ -60,7 +61,8 @@
                 if(trim(filter_input(INPUT_POST, 'username')) == ''){
                     $_SESSION['error']['username'] = "The username cannot be left blank";
                 }   else{
-                    $values .= " userName = :username";
+                    array_push($updateString, " userName = :variable");
+                    array_push($updateValues, filter_input(INPUT_POST, 'username'));
                     $username = filter_input(INPUT_POST, 'username');
                     $changeName = TRUE;
                 }
@@ -70,8 +72,9 @@
                 if(trim(filter_input(INPUT_POST, 'email')) == ''){
                     $_SESSION['error']['email'] = "The email cannot be left blank";
                 }   else{
-                    $values .= " email = :email";
-                    $username = filter_input(INPUT_POST, 'email');
+                    array_push($updateString, " email = :variable");
+                    array_push($updateValues, filter_input(INPUT_POST, 'email'));
+                    $email = filter_input(INPUT_POST, 'email');
                     $changeMail = TRUE;
                 }
             }
@@ -80,8 +83,8 @@
                 if(trim(filter_input(INPUT_POST, 'password')) == ''){
                     $_SESSION['error']['password'] = "The password cannot be left blank";
                 }   else{
-                    $values .= " password = :password";
-                    $username = filter_input(INPUT_POST, 'password');
+                    array_push($updateString, " password = :variable");
+                    array_push($updateValues, filter_input(INPUT_POST, 'password'));
                 }
             }
             
@@ -119,7 +122,19 @@
                     exit;
                 }   else{
                     try{
-                        //insert new values into the database
+                        //loop through the elements in updatevalues/updatestring and add accordingly
+                        
+                        for($i = 0; $i < count($updateString); $i++){
+                            
+                            $myQuery = "UPDATE user SET ".$updateString[$i]." WHERE email = '$email1';";
+                            echo "$myQuery";
+                            $sqlUpdate = $connection->prepare($myQuery);
+                            $sqlUpdate->bindParam(":variable", $updateValues[$i]);
+                            echo "</br>Binding "."$updateValues[$i]";
+                            $successfulUpdate = $sqlUpdate->execute();
+                            
+                        }
+                        /*
                         $myQuery = "UPDATE user SET ".$values." WHERE email = '$email1';";
                         echo "$myQuery";
                         $sqlUpdate = $connection->prepare($myQuery);
@@ -138,7 +153,7 @@
                         }
                         
                         $SuccessfulUpdate = $sqlUpdate->execute();
-                        
+                        */
                         if($SuccessfulUpdate && $changeMail){
                             $_SESSION['user_email'] = $email;
                         }

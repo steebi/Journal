@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS shareLib(
     sharedUser VARCHAR(100) NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(sharedUser) REFERENCES user(email)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS reference(
