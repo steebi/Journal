@@ -31,6 +31,7 @@
             try{
                 //takes in the email and password and sees if that user exists in the database
                 $testMail = $_SESSION['user_email'];
+                echo "$testMail";
                 $testPassword = trim(filter_input(INPUT_POST, 'verifyPassword'));
                 $verifyUser = $connection->prepare("SELECT * FROM user WHERE email = :email AND password = :password;");
                 $verifyUser->bindparam(':email', $testMail);
