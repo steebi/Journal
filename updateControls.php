@@ -91,25 +91,28 @@
             }
             
             //Now the fields have been assigned if the email is set then test it to see
-            //it is of the correct form. Then check it is not already in use.
-            if(isset($_POST['changeEmail']) && filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)){
-                try{
-                    //checks if the email already exists in the DB and doesn't accept it if it does
-                    $email = filter_input(INPUT_POST, 'email');
-                    $doesEmailExist = $connection->prepare("SELECT * FROM user WHERE email = :email;");
-                    $doesEmailExist->bindParam(':email', $email);
-                    $doesEmailExist->execute();
-                    //if the array is bigger than 0 then the email already exists in the DB
-                    if(count($doesEmailExist->fetchAll())>0){
-                        $_SESSION['error']['email'] = "This Email is already in use!";
+            //it is of the correct form. 
+            if(isset($_POST['changeEmail'])){
+                //checks email is of correct form, if it is check the database to see if it is already in use
+                if(filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)){
+                    try{
+                        //checks if the email already exists in the DB and doesn't accept it if it does
+                        $email = filter_input(INPUT_POST, 'email');
+                        $doesEmailExist = $connection->prepare("SELECT * FROM user WHERE email = :email;");
+                        $doesEmailExist->bindParam(':email', $email);
+                        $doesEmailExist->execute();
+                        //if the array is bigger than 0 then the email already exists in the DB
+                        if(count($doesEmailExist->fetchAll())>0){
+                            $_SESSION['error']['email'] = "This Email is already in use!";
+                        }
+                    }   catch (PDOException $e) {
+                        echo $e->getMessage();
                     }
-                }   catch (PDOException $e) {
-                    echo $e->getMessage();
-                }
 
-            }   else{
-                //if the format is not a valid email format return an error
-                $_SESSION['error']['email'] = "This is not a valid email";
+                }   else{
+                    //if the format is not a valid email format return an error
+                    $_SESSION['error']['email'] = "This is not a valid email";
+                }
             }
             //ensures there are no special characters in the username
             if (preg_match('/[^A-Za-z0-9]/', filter_input(INPUT_POST, 'username')))
