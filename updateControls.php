@@ -132,7 +132,7 @@
                             $sqlUpdate->bindParam(":variable", $updateValues[$i]);
                             echo "</br>Binding "."$updateValues[$i]";
                             $successfulUpdate = $sqlUpdate->execute();
-                            
+                            echo "</br>$successfulUpdate";
                         }
                         /*
                         $myQuery = "UPDATE user SET ".$values." WHERE email = '$email1';";
