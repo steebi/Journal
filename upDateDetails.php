@@ -32,22 +32,21 @@ and open the template in the editor.
             <p>Select which element to update</p>
             <form action="updateControls.php" method='post'>
                 <p>
-                    <label for='username'>User name:</label></br>
-                    <input name='changeUserName' type='checkbox' value='YES'/>
+                    <label for='username' class='checkboxlabel'><input name='changeUserName' type='checkbox' value='YES' class='checkboxinput'/>User name:</label></br>
+                    
                     <input name = 'username' type='text' id='username'size='40'/>
                 </p>
                 <p>
-                    <label for='email'>Email address:</label></br>
-                    <input name='changeEmail' type='checkbox' value='YES'/>
+                    <label for='email' class='checkboxlabel'><input name='changeEmail' type='checkbox' value='YES' class='checkboxinput'/>Email address:</label></br>
+                    
                     <input name = 'email' type='text' id='email'size='40'/>
                 </p>
                 <p>
-                    <label for='password'>Password:</label></br>
-                    <input name='changePassword' type='checkbox' value='YES'/>
+                    <label for='password' class='checkboxlabel'><input name='changePassword' type='checkbox' value='YES' class='checkboxinput'/>Password:</label></br>              
                     <input name = 'password' type='password' id='password'size='40'/>
                 </p>
                 <p>
-                    <label for='confirmPassword'>Retype password:</label>></br>
+                    <label for='confirmPassword' class='checkboxlabel'>Retype password:</label>></br>
                     <input name='confirmPassword' type='password' id='confirmPassword' size='40'/>
                 </p>
                 <p>
