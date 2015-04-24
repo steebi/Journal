@@ -21,12 +21,12 @@
             if(filter_input(INPUT_POST, 'password') == ''){
                 $_SESSION['error']['password'] = "Password is required.";
             }
-            if(filter_input(INPUT_POST, 'passwordVerification') == ''){
-                $_SESSION['error']['password'] = "Password is required.";
+            if(filter_input(INPUT_POST, 'passwordConfirm') == ''){
+                $_SESSION['error']['password'] = "You must re-type your password.";
             }
             
             //check two passwords are the same
-            if(filter_input(INPUT_POST, 'password') != filter_input(INPUT_POST, 'password')){
+            if(filter_input(INPUT_POST, 'password') != filter_input(INPUT_POST, 'passwordConfirm')){
                 $_SESSION['error']['password'] = "Passwords do not match!";
             }
             
