@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-            session_start();
-            if($_SESSION['user_email'] == '')
-            {
-                echo "Got here!";
-                echo $_SESSION['user_email'];
-                //header("Location: index.php");
-                //exit;
-            }
-            echo "Hi ".$_SESSION['user_email'];
-       ?>
-       <a href="logout.php">Logout</a>
-    </body>
-</html>
+<?php
+    session_start();
+    //if user has not logged in yet then redirect to login page
+    if($_SESSION['user_email'] == ''){
+        header("Location: index.php");
+        exit;
+    }
+    $mail = $_SESSION['user_email'];
+    $userName = $_SESSION['user_name'];
+
+    require_once "lib/Smarty.class.php";
+
+    $template = new Smarty();
+
+    //this assigns variables to the template dynamically. So the templates are brought in in the Smarty object and these 3 statements replace variables in the template with these values 
+    $template->assign("user_email", $mail);
+    $template->assign("user_name", $userName);
+    $template->display('home.tpl');
+?>

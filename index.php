@@ -3,26 +3,41 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="registerStyles.css">
-        <title>BibMan</title>
+        <title>BibTex</title>
     </head>
     <body>
         <?php
                 session_start();
+                
+                //see if the user is already logged in. If they are redirect to home.php
+                if(isset($_SESSION['user_email'])){
+                    header("Location: home.php");
+                    exit;
+                }
+                //include connection information for database
                 include('database.php');
+                //set an incorrect login variable to TRUE initially. If an incorrect login is found then inform the user
                 $incorrectLogin = TRUE;
+                //if there was some information given in post examin it to either login 
                 if(isset($_POST['submit'])){
                     try{
+                        //takes in the email and password and sees if that user exists in the database
                         $email = trim(filter_input(INPUT_POST, 'email'));
                         $password = trim(filter_input(INPUT_POST, 'password'));
                         $login = $connection->prepare("SELECT * FROM user WHERE email = :email AND password = :password;");
                         $login->bindparam(':email', $email);
                         $login->bindparam(':password', $password);
                         $login->execute();
-                        //$print = $login->fetch();
+                        $print = $login->fetchAll();
+                        $number = count($print);
                         //print_r($print);
-                        if(count($login->fetchAll()) == 1){
-                            $row = $login->fetch();
-                            $_SESSION['user_email'] = $row['email'];
+                        //if a match is found then record a session variable of the user email
+                        //and go to the home page
+                        if($number == 1){
+                            $mail = $print[0]['email'];
+                            $username = $print[0]['userName'];
+                            $_SESSION['user_email'] = $mail;
+                            $_SESSION['user_name'] = $username;
                             header("Location: home.php");
                             exit;
                         }   else{
@@ -38,11 +53,11 @@
         
         <div id="header" >
             <span><a href="index.php">Login</a></span>&nbsp;|&nbsp;<span><a href="register.php">Register</a></span>
-            <span class="right">BibMan!</span>
+            <span class="right">BibTex!</span>
         </div>
         
         <div id = "login-form" class = "centerForm">
-            <h2>BibMan!</h2>
+            <h2>BibTex!</h2>
             <p>Please login below!</p>
             <form action="index.php" method="post" >
                 <p>

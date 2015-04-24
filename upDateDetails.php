@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="registerStyles.css">
+        <link rel="stylesheet" lang="text/css" href="styles.css"/>
         <title>BibTex</title>
     </head>
-    
     <body>
         <?php
-            //load the session data if there is any
             session_start();
-            //see if there is a session variable with logged in data. If there is redirect to home.php
-            include('database.php');
-            if(isset($_SESSION['user_email'])){
-                header("Location: home.php");
+            //see if the user is already logged in. If they are redirect to home.php
+            if(!isset($_SESSION['user_email'])){
+                header("Location: index.php");
                 exit;
             }
+            $mail = $_SESSION['user_email'];
+            $userName = $_SESSION['user_name'];
         ?>
         
-        
         <div id="header" >
-            <span class="first-command-header"><a href="index.php">Login</a></span>&nbsp;|&nbsp;<span><a href="register.php">Register</a></span>
-            <span class="right">BibMan!</span>
+            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a></span>
+            <span class="right"><a href="/BibTex/upDateDetails.php"><?php echo "$userName"; ?></a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
         
-        <div id = "signup-form" class = "centerForm">
-            <h2>Sign up to BibMan!</h2>
-            <p>To sign up enter your details below</p>
-            <form action="registerControls.php" method='post'>
+        <div id = "update-form" class = "centerForm">
+            <h2>Change your details!</h2>
+            <p>Select which element to update</p>
+            <form action="updateControls.php" method='post'>
                 <p>
                     <label for='username'>User name:</label></br>
                     <input name = 'username' type='text' id='username'size='40'/>
@@ -38,12 +40,8 @@
                     <input name = 'email' type='text' id='email'size='40'/>
                 </p>
                 <p>
-                    <label for='password'>New Password:</label></br>
+                    <label for='input'>Password:</label></br>
                     <input name = 'password' type='password' id='password'size='40'/>
-                </p>
-                <p>
-                    <label for='passwordConfirm'>Confirm Password:</label></br>
-                    <input name = 'passwordConfirm' type='password' id='passwordConfirm'size='40'/>
                 </p>
                 <p class="errors">
                     <?php
@@ -69,6 +67,8 @@
                 </p>
             </form>
         </div>
+        
+    </body>
         
     </body>
 </html>
