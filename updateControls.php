@@ -38,7 +38,7 @@
                 $verifyUser->execute();
                 $print = $verifyUser->fetchAll();
                 $number = count($print);
-                //print_r($print);
+                print_r($print);
                 //if a match is found then record a session variable of the user email
                 //and go to the home page
                 if($number == 1){
