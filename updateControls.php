@@ -39,7 +39,7 @@
                 $verifyUser->execute();
                 $print = $verifyUser->fetchAll();
                 $number = count($print);
-                print_r($print);
+                //print_r($print);
                 //if a match is found then record a session variable of the user email
                 //and go to the home page
                 if($number == 1){
@@ -47,7 +47,7 @@
                 }   else{
                     //otherwise kick the user back to the upDateDetails page and return an error for incorrect password
                     $_SESSION['error']['login'] = "The password was incorrect for this account!";
-                        //header("Location: upDateDetails.php");
+                        header("Location: upDateDetails.php");
                         exit;
                     }
                         
