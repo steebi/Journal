@@ -22,6 +22,7 @@
             $username = "";
             $email = "";
             $password = "";
+            $updateSuccessFul = FALSE;
             //these are used to update the session variables in the case either is changed
             $changeName = FALSE;
             $changeMail = FALSE;
@@ -31,7 +32,6 @@
             try{
                 //takes in the email and password and sees if that user exists in the database
                 $testMail = $_SESSION['user_email'];
-                echo "$testMail";
                 $testPassword = trim(filter_input(INPUT_POST, 'verifyPassword'));
                 $verifyUser = $connection->prepare("SELECT * FROM user WHERE email = :email AND password = :password;");
                 $verifyUser->bindparam(':email', $testMail);
@@ -69,6 +69,16 @@
                 }
             }
             
+            if(isset($_POST['changePassword']) && filter_input(INPUT_POST, 'changePassword') == 'YES'){
+                if(trim(filter_input(INPUT_POST, 'password')) == ''){
+                    $_SESSION['error']['password'] = "The password cannot be left blank";
+                }   else{
+                    array_push($updateString, " password = :variable");
+                    array_push($updateValues, filter_input(INPUT_POST, 'password'));
+                }
+            }
+            
+            //email must be last so the email is not changed and the SQL statements can use the correct email
             if(isset($_POST['changeEmail']) && filter_input(INPUT_POST, 'changeEmail') == 'YES'){
                 if(trim(filter_input(INPUT_POST, 'email')) == ''){
                     $_SESSION['error']['email'] = "The email cannot be left blank";
@@ -79,16 +89,6 @@
                     $changeMail = TRUE;
                 }
             }
-            
-            if(isset($_POST['changePassword']) && filter_input(INPUT_POST, 'changePassword') == 'YES'){
-                if(trim(filter_input(INPUT_POST, 'password')) == ''){
-                    $_SESSION['error']['password'] = "The password cannot be left blank";
-                }   else{
-                    array_push($updateString, " password = :variable");
-                    array_push($updateValues, filter_input(INPUT_POST, 'password'));
-                }
-            }
-            
             
             //Now the fields have been assigned if the email is set then test it to see
             //it is of the correct form. Then check it is not already in use.
@@ -128,37 +128,18 @@
                         for($i = 0; $i < count($updateString); $i++){
                             
                             $myQuery = "UPDATE user SET ".$updateString[$i]." WHERE email = '$email1';";
-                            echo "$myQuery";
+                            //echo "$myQuery";
                             $sqlUpdate = $connection->prepare($myQuery);
                             $sqlUpdate->bindParam(":variable", $updateValues[$i]);
-                            echo "</br>Binding "."$updateValues[$i]";
-                            $successfulUpdate = $sqlUpdate->execute();
-                            echo "</br>$successfulUpdate";
-                        }
-                        /*
-                        $myQuery = "UPDATE user SET ".$values." WHERE email = '$email1';";
-                        echo "$myQuery";
-                        $sqlUpdate = $connection->prepare($myQuery);
-
-                        if(!(trim(filter_input(INPUT_POST, 'username')) == '')){
-                            $sqlUpdate->bindParam(":username", $username);
-                            echo "</br> Bind Param1";
-                        }
-                        if(!(trim(filter_input(INPUT_POST, 'password')) == '')){
-                            $sqlUpdate->bindParam(":password", $password);
-                            echo "</br> Bind Param2";
-                        }
-                        if(!(trim(filter_input(INPUT_POST, 'email')) == '')){
-                            $sqlUpdate->bindParam(":email", $email);
-                            echo "</br> Bind Param3";
+                            //echo "</br>Binding "."$updateValues[$i]";
+                            $updateSuccessFul = $sqlUpdate->execute();
+                            //echo "</br>$successfulUpdate";
                         }
                         
-                        $SuccessfulUpdate = $sqlUpdate->execute();
-                        */
-                        if($SuccessfulUpdate && $changeMail){
+                        if($updateSuccessFul && $changeMail){
                             $_SESSION['user_email'] = $email;
                         }
-                        if($SuccessfulUpdate && $changeName){
+                        if($updateSuccessFul && $changeName){
                             $_SESSION['user_name'] = $username;
                         }
                         
@@ -183,7 +164,7 @@
                 if($nochanges){
                     echo "<p>No changes were made to your details.</p><p><a href = \"/home.php\">Return Home</a></p>";
                 }else{
-                if($SuccessfulUpdate === 1){
+                if($updateSuccessFul){
                         echo "<p>Details successfully changed!</p><a href = \"/home.php\">Return to home.</a>";
                     }   else{
                         echo "<p class=\"errors\">There was a problem updating your account. </p><p><a href = \"/upDateDetails.php\">Try again.</a></p>";
