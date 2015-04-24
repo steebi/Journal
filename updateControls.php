@@ -46,7 +46,7 @@
                 }   else{
                     //otherwise kick the user back to the upDateDetails page and return an error for incorrect password
                     $_SESSION['error']['login'] = "The password was incorrect for this account!";
-                        header("Location: upDateDetails.php");
+                        //header("Location: upDateDetails.php");
                         exit;
                     }
                         
