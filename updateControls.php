@@ -114,19 +114,19 @@
             ?>
         <div id="header" >
             <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a></span>
-            <span class="right"><a href="/BibTex/upDateDetails.php"><?php echo "$myName"; ?></a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
+            <span class="right"><a href="/upDateDetails.php"><?php echo "$myName"; ?></a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
         
         <div class="centerForm">
             <?php
                 //if the user has been successfully registered then allow them to register and then login
                 if($nochanges){
-                    echo "<p>No changes were made to your details.</p><p><a href = \"/BibTex/home.php\">Return Home</a></p>";
+                    echo "<p>No changes were made to your details.</p><p><a href = \"/home.php\">Return Home</a></p>";
                 }else{
                 if($SuccessfulUpdate){
-                        echo "<p>Details successfully changed!</p><a href = \"/BibTex/home.php\">Return to home.</a>";
+                        echo "<p>Details successfully changed!</p><a href = \"/home.php\">Return to home.</a>";
                     }   else{
-                        echo "<p class=\"errors\">There was a problem updating your account. </p><p><a href = \"/BibTex/upDateDetails.php\">Try again.</a></p>";
+                        echo "<p class=\"errors\">There was a problem updating your account. </p><p><a href = \"/upDateDetails.php\">Try again.</a></p>";
                     }
                 }
             ?>

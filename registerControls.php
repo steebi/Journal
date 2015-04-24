@@ -145,7 +145,7 @@
                 //if the user has been successfully registered then allow them to register and then login
                 if($insertSuccessFull){
                     echo "<p>Complete the registration process by clicking the following link!</p>";
-                    echo "<a href=\"http://localhost/BibTex/confirm.php?RegCode=$reg_code\" >Click here to confirm account!</a>";
+                    echo "<a href=\"/confirm.php?RegCode=$reg_code\" >Click here to confirm account!</a>";
                 }   else{
                     echo "<p class=\"errors\">There was a problem creating your account. </p>>Try again.</p>";
                 }
