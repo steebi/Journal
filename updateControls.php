@@ -14,62 +14,107 @@
             $email1 = $_SESSION['user_email'];
             $nochanges = FALSE;
             //if there is something in the input fields then add them to the update field
-            $values = " ";
+            //These strings will be used to update the fields that need to be changed in the database
+            //values will store the variables that need to be updated, the others will store the value
+            //to be passed to the update statement
+            $values = "";
             $username = "";
             $email = "";
             $password = "";
+            //these are used to update the session variables in the case either is changed
             $changeName = FALSE;
             $changeMail = FALSE;
-            if(!(trim(filter_input(INPUT_POST, 'username')) == '')){
-                $values .= " userName= :username ";
-                $username = filter_input(INPUT_POST, 'username');
-                $changeName = TRUE;
-            }
-            if(!(trim(filter_input(INPUT_POST, 'email')) == '')){
-                $values .= " email = :email ";
-                $email = filter_input(INPUT_POST, 'email');
-                $changeMail = TRUE;
-            }
-            if(!(trim(filter_input(INPUT_POST, 'password')) == '')){
-                $values .= " password = :password ";
-                $email = filter_input(INPUT_POST, 'password');
-            }
-            //if no changes were 
-            if(filter_input(INPUT_POST, 'username') == '' && filter_input(INPUT_POST, 'email') == '' && filter_input(INPUT_POST, 'password') == ''){
-                $nochanges = TRUE;
+            
+            //first to check is that the password for this user is correct.
+            
+            try{
+                //takes in the email and password and sees if that user exists in the database
+                $testMail = $_SESSION['user_email'];
+                $testPassword = trim(filter_input(INPUT_POST, 'verifyPassword'));
+                $verifyUser = $connection->prepare("SELECT * FROM user WHERE email = :email AND password = :password;");
+                $verifyUser->bindparam(':email', $testMail);
+                $verifyUser->bindparam(':password', $testPassword);
+                $verifyUser->execute();
+                $print = $verifyUser->fetchAll();
+                $number = count($print);
+                //print_r($print);
+                //if a match is found then record a session variable of the user email
+                //and go to the home page
+                if($number == 1){
+                    //the user is confirmed to be who they are and the script can continue.
                 }   else{
-                //Now that all fields are prepared validate the email for
-                //the correct form and also to ensure it is not in use already
-                if(!(filter_input(INPUT_POST, 'email') == '' && filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL))){
-                    try{
-                        //checks if the email already exists in the DB and doesn't accept it if it does
-                        $email = filter_input(INPUT_POST, 'email');
-                        $doesEmailExist = $connection->prepare("SELECT * FROM user WHERE email = :email;");
-                        $doesEmailExist->bindParam(':email', $email);
-                        $doesEmailExist->execute();
-                        //if the array is bigger than 0 then the email already exists in the DB
-                        if(count($doesEmailExist->fetchAll())>0){
-                            $_SESSION['error']['email'] = "This Email is already in use!";
-                        }
-                    }   catch (PDOException $e) {
-                        echo $e->getMessage();
+                    //otherwise kick the user back to the upDateDetails page and return an error for incorrect password
+                    $_SESSION['error']['login'] = "The password was incorrect for this account!";
+                        header("Location: upDateDetails.php");
+                        exit;
                     }
-
+                        
+                    }   catch(PDOException $e){
+                        echo $e->getMessage();
+            }
+            
+            
+            //first check if the check boxes are set, if they are then check the string is not empty
+            //and add them to the strings defined above for the sql update query
+            if(isset($_POST['changeUserName']) && filter_input(INPUT_POST, 'changeUserName') == 'YES'){
+                if(trim(filter_input(INPUT_POST, 'username')) == ''){
+                    $_SESSION['error']['username'] = "The username cannot be left blank";
                 }   else{
-                    //if the format is not a valid email format return an error
-                    $_SESSION['error']['email'] = "This is not a valid email";
+                    $values .= " userName = :username";
+                    $username = filter_input(INPUT_POST, 'username');
+                    $changeName = TRUE;
+                }
+            }
+            
+            if(isset($_POST['changeEmail']) && filter_input(INPUT_POST, 'changeEmail') == 'YES'){
+                if(trim(filter_input(INPUT_POST, 'email')) == ''){
+                    $_SESSION['error']['email'] = "The email cannot be left blank";
+                }   else{
+                    $values .= " email = :email";
+                    $username = filter_input(INPUT_POST, 'email');
+                    $changeMail = TRUE;
+                }
+            }
+            
+            if(isset($_POST['changePassword']) && filter_input(INPUT_POST, 'changePassword') == 'YES'){
+                if(trim(filter_input(INPUT_POST, 'password')) == ''){
+                    $_SESSION['error']['password'] = "The password cannot be left blank";
+                }   else{
+                    $values .= " password = :password";
+                    $username = filter_input(INPUT_POST, 'password');
+                }
+            }
+            
+            
+            //Now the fields have been assigned if the email is set then test it to see
+            //it is of the correct form. Then check it is not already in use.
+            if($changeMail && filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)){
+                try{
+                    //checks if the email already exists in the DB and doesn't accept it if it does
+                    $email = filter_input(INPUT_POST, 'email');
+                    $doesEmailExist = $connection->prepare("SELECT * FROM user WHERE email = :email;");
+                    $doesEmailExist->bindParam(':email', $email);
+                    $doesEmailExist->execute();
+                    //if the array is bigger than 0 then the email already exists in the DB
+                    if(count($doesEmailExist->fetchAll())>0){
+                        $_SESSION['error']['email'] = "This Email is already in use!";
+                    }
+                }   catch (PDOException $e) {
+                    echo $e->getMessage();
                 }
 
-                //ensures there are no special characters in the username
-                if (preg_match('/[^A-Za-z0-9]/', filter_input(INPUT_POST, 'username')))
-                {
-                  $_SESSION['error']['username'] = "No special characters allowed in username";
-                }
-
-                //Now that the input has been validated if there is an error the user will be 
-                //stopped and redirected back to the register page with an error
-
-                if(isset($_SESSION['error'])){
+            }   else{
+                //if the format is not a valid email format return an error
+                $_SESSION['error']['email'] = "This is not a valid email";
+            }
+            //ensures there are no special characters in the username
+            if (preg_match('/[^A-Za-z0-9]/', filter_input(INPUT_POST, 'username')))
+            {
+              $_SESSION['error']['username'] = "No special characters allowed in username";
+            }
+            //Now that the input has been validated if there is an error the user will be 
+            //stopped and redirected back to the register page with an error
+            if(isset($_SESSION['error'])){
                     header("Location: upDateDetails.php");
                     exit;
                 }   else{
@@ -108,8 +153,7 @@
                         echo $e->getMessage();
                     }
 
-                    } 
-                }
+                    }
             
             ?>
         <div id="header" >

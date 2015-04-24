@@ -33,15 +33,26 @@ and open the template in the editor.
             <form action="updateControls.php" method='post'>
                 <p>
                     <label for='username'>User name:</label></br>
+                    <input name='changeUserName' type='checkbox' value='YES'/>
                     <input name = 'username' type='text' id='username'size='40'/>
                 </p>
                 <p>
                     <label for='email'>Email address:</label></br>
+                    <input name='changeEmail' type='checkbox' value='YES'/>
                     <input name = 'email' type='text' id='email'size='40'/>
                 </p>
                 <p>
-                    <label for='input'>Password:</label></br>
+                    <label for='password'>Password:</label></br>
+                    <input name='changePassword' type='checkbox' value='YES'/>
                     <input name = 'password' type='password' id='password'size='40'/>
+                </p>
+                <p>
+                    <label for='confirmPassword'>Retype password:</label>></br>
+                    <input name='confirmPassword' type='password' id='confirmPassword' size='40'/>
+                </p>
+                <p>
+                    <label for='verifyPassword'>Please confirm changes by typing old password</label></br>
+                    <input name='verifyPassword' type='password' id='verifyPassword' size='40'/>
                 </p>
                 <p class="errors">
                     <?php
@@ -55,6 +66,9 @@ and open the template in the editor.
                             }
                             if(isset($_SESSION['error']['password'])){
                             echo '<p>'.$_SESSION['error']['password'].'</p>';
+                            }
+                            if(isset($_SESSION['error']['login'])){
+                            echo '<p>'.$_SESSION['error']['login'].'</p>';
                             }
 
                             //unset the error session variable
