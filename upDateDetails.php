@@ -53,7 +53,7 @@ and open the template in the editor.
                     <label for='verifyPassword'>Please confirm changes by typing old password</label></br>
                     <input name='verifyPassword' type='password' id='verifyPassword' size='40'/>
                 </p>
-                <p class="errors">
+                <div class="errors">
                     <?php
                         //If an error was passed in session print the error message recorded
                         if(isset($_SESSION['error'])){
@@ -72,10 +72,9 @@ and open the template in the editor.
 
                             //unset the error session variable
                             unset($_SESSION['error']);
-                            $message = $_SESSION['error']['login'];
                         }
                     ?>
-                </p>
+                </div>
                 <p>
                     <input name='submit' type='submit' value='Submit'/>
                 </p>
