@@ -65,7 +65,7 @@
                     ?>
                 </p>
                 <p>
-                    <input name='submit' type='submit' value='Submit'/>
+                    <input class="submit" name='submit' type='submit' value='Submit'/>
                 </p>
             </form>
         </div>

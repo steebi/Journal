@@ -24,8 +24,9 @@
             $setRegCode->bindParam(':reg_code', $RegCode);
             $execute = $setRegCode->execute();
             if($execute){
+                $message = "<p>Your account has been confirmed!</p>";
             }   else{
-                echo "Some error occured";
+                $message = "<p class=\"error\">There was an error registering your account!</p>";
             }
 
         ?>
@@ -35,7 +36,7 @@
         </div>
         
         <div class="centerForm">
-            <p>Your account has been confirmed!</p>
+            <?php echo $message; ?>
             <p>Please login now:</p>
             <a href="index.php">Login</a>
         </div>

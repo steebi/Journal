@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-23 17:47:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-24 22:25:23
          compiled from ".\templates\home.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:190815539048734b6b6-33638628%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'eac3cf626f39945169284be9eb498f874ada9b8e' => 
     array (
       0 => '.\\templates\\home.tpl',
-      1 => 1429804073,
+      1 => 1429871290,
       2 => 'file',
     ),
   ),
@@ -34,7 +34,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <body>
         <div id="header" >
             <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a></span>
-            <span class="right"><a href="/BibTex/upDateDetails.php"><?php echo $_smarty_tpl->tpl_vars['user_name']->value;?>
+            <span class="right"><a href="/upDateDetails.php"><?php echo $_smarty_tpl->tpl_vars['user_name']->value;?>
 </a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
        

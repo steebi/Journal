@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="registerStyles.css">
+        <link rel="stylesheet" type="text/css" href="registerStyles.css?relaod">
         <title>BibTex</title>
     </head>
     <body>
@@ -76,7 +76,7 @@
                     ?>
                 </p>
                 <p>
-                    <input name="submit" type="submit" value="Submit"/>
+                    <input class="submit" name="submit" type="submit" value="Submit"/>
                 </p>
            </form>
         </div>

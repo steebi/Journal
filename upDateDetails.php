@@ -50,7 +50,7 @@ and open the template in the editor.
                     <input name='confirmPassword' type='password' id='confirmPassword' size='40'/>
                 </p>
                 <p>
-                    <label for='verifyPassword'>Please confirm changes by typing old password</label></br>
+                    <label for='verifyPassword'>Please confirm changes by typing old password:</label></br>
                     <input name='verifyPassword' type='password' id='verifyPassword' size='40'/>
                 </p>
                 <div class="errors">
@@ -76,7 +76,7 @@ and open the template in the editor.
                     ?>
                 </div>
                 <p>
-                    <input name='submit' type='submit' value='Submit'/>
+                    <input class="submit" name='submit' type='submit' value='Submit'/>
                 </p>
             </form>
         </div>
