@@ -18,36 +18,61 @@
                 include('database.php');
                 //set an incorrect login variable to TRUE initially. If an incorrect login is found then inform the user
                 $incorrectLogin = TRUE;
-                //if there was some information given in post examin it to either login 
+                
+                echo "";
+                
+                //if there was some information given in post examine it to either login or give error to pass in post
                 if(isset($_POST['submit'])){
-                    try{
-                        //takes in the email and password and sees if that user exists in the database
-                        $email = trim(filter_input(INPUT_POST, 'email'));
-                        $password = trim(filter_input(INPUT_POST, 'password'));
-                        $login = $connection->prepare("SELECT * FROM user WHERE email = :email AND password = :password;");
-                        $login->bindparam(':email', $email);
-                        $login->bindparam(':password', $password);
-                        $login->execute();
-                        $print = $login->fetchAll();
-                        $number = count($print);
-                        //print_r($print);
-                        //if a match is found then record a session variable of the user email
-                        //and go to the home page
-                        if($number == 1){
-                            $mail = $print[0]['email'];
-                            $username = $print[0]['userName'];
-                            $_SESSION['user_email'] = $mail;
-                            $_SESSION['user_name'] = $username;
-                            header("Location: home.php");
-                            exit;
-                        }   else{
-                            $incorrectLogin = FALSE;
-                        }
-                        
-                    }   catch(PDOException $e){
-                        echo $e->getMessage();
-                    }
                     
+                    //first confirm that the input is not empty
+                    if(filter_input(INPUT_POST, 'email') == '' && filter_input( INPUT_POST, 'password')==''){
+                        $_SESSION['error']['login']="Both fields were left blank!";
+                    }   else if(filter_input(INPUT_POST, 'password') == ''){
+                        $_SESSION['error']['login']="The password field was left blank!";
+                    }   else if(filter_input(INPUT_POST, 'email') == ''){
+                        $_SESSION['error']['login']="The email field was left blank!";
+                    }   else{
+                        echo "Skipped all that shit!";
+                        try{
+                            //first tests to see if the username is in the database
+                            $email = trim(filter_input(INPUT_POST, 'email'));
+                            $userExists = $connection->prepare("SELECT username FROM user WHERE email = :email;");
+                            $userExists->bindParam(':email', $email);
+                            $userExists->execute();
+                            $confirmUser = $userExists->fetchAll();
+                            $countUsers = count($confirmUser);
+                            if($countUsers == 1){
+                                //user was confirmed to be in the database so now check that the password is correct
+                                $password = trim(filter_input(INPUT_POST, 'password'));
+                                $login = $connection->prepare("SELECT * FROM user WHERE email = :email AND password = :password;");
+                                $login->bindparam(':email', $email);
+                                $login->bindparam(':password', $password);
+                                $login->execute();
+                                $print = $login->fetchAll();
+                                $number = count($print);
+                                //print_r($print);
+                                //if a match is found then record a session variable of the user email
+                                //and go to the home page
+                                if($number == 1){
+                                    $mail = $print[0]['email'];
+                                    $username = $print[0]['userName'];
+                                    $_SESSION['user_email'] = $mail;
+                                    $_SESSION['user_name'] = $username;
+                                    header("Location: home.php");
+                                    exit;
+                                }   else{
+                                    $incorrectLogin = FALSE;
+                                    $_SESSION['error']['login'] = "The password is incorrect for this user!";
+                                }
+                            }  else{
+                                $incorrectLogin = FALSE;
+                                $_SESSION['error']['login'] = "This user does not exist!";
+                            }
+                        }   catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+
+                    }
                 }
         ?>
         
@@ -68,13 +93,16 @@
                     <label for="password">Password:</label></br>
                     <input name="password" type="password" id="password" size="30"/>
                 </p>
-                <p class="errors">
+                <div class="errors">
                     <?php
-                        if(!$incorrectLogin){
-                            echo "The password does not match this user!";
+                        //if there is an error then print it to the user
+                        if(isset($_SESSION['error']['login'])){
+                            $error = $_SESSION['error']['login'];
+                            echo "<p>$error</p>";
+                            unset($_SESSION['error']);
                         }
                     ?>
-                </p>
+                </div>
                 <p>
                     <input class="submit" name="submit" type="submit" value="Submit"/>
                 </p>

@@ -165,10 +165,10 @@
             <?php
                 //if the user has been successfully registered then allow them to register and then login
                 if($nochanges){
-                    echo "<p>No changes were made to your details.</p><p><a href = \"/home.php\">Return Home</a></p>";
+                    echo "<p>No changes were made to your details.</p><p><a href = \"home.php\">Return Home</a></p>";
                 }else{
                 if($updateSuccessFul){
-                        echo "<p>Details successfully changed!</p><a href = \"/home.php\">Return to home.</a>";
+                        echo "<p>Details successfully changed!</p><a href = \"home.php\">Return to home.</a>";
                     }   else{
                         echo "<p class=\"errors\">There was a problem updating your account. </p><p><a href = \"/upDateDetails.php\">Try again.</a></p>";
                     }

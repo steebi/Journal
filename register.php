@@ -45,7 +45,7 @@
                     <label for='passwordConfirm'>Confirm Password:</label></br>
                     <input name = 'passwordConfirm' type='password' id='passwordConfirm'size='40'/>
                 </p>
-                <p class="errors">
+                <div class="errors">
                     <?php
                         //If an error was passed in session print the error message recorded
                         if(isset($_SESSION['error'])){
@@ -55,15 +55,18 @@
                             if(isset($_SESSION['error']['email'])){
                                 echo '<p>'.$_SESSION['error']['email'].'</p>';
                             }
-                            if(isset($_SESSION['error']['password'])){
-                            echo '<p>'.$_SESSION['error']['password'].'</p>';
+                            if(isset($_SESSION['error']['password1'])){
+                            echo '<p>'.$_SESSION['error']['password1'].'</p>';
+                            }
+                            if(isset($_SESSION['error']['password2'])){
+                            echo '<p>'.$_SESSION['error']['password2'].'</p>';
                             }
 
                             //unset the error session variable
                             unset($_SESSION['error']);
                         }
                     ?>
-                </p>
+                </div>
                 <p>
                     <input class="submit" name='submit' type='submit' value='Submit'/>
                 </p>

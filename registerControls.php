@@ -19,15 +19,15 @@
                 $_SESSION['error']['email'] = "Email is required.";
             }
             if(filter_input(INPUT_POST, 'password') == ''){
-                $_SESSION['error']['password'] = "Password is required.";
+                $_SESSION['error']['password1'] = "Password is required.";
             }
             if(filter_input(INPUT_POST, 'passwordConfirm') == ''){
-                $_SESSION['error']['password'] = "You must re-type your password.";
+                $_SESSION['error']['password2'] = "You must re-type your password.";
             }
             
             //check two passwords are the same
             if(filter_input(INPUT_POST, 'password') != filter_input(INPUT_POST, 'passwordConfirm')){
-                $_SESSION['error']['password'] = "Passwords do not match!";
+                $_SESSION['error']['password2'] = "Passwords do not match!";
             }
             
             //Now that all fields are confirmed to be non-null validate the email for
@@ -98,7 +98,7 @@
                     //we also want to create the thrash and unfiled folders by default for this user after they have registered
                     try{
                         $email = filter_input(INPUT_POST, 'email');
-                        $createThrash = $connection->prepare("INSERT INTO library (displayName, ownerEmail) VALUES ('thrash', :ownerEmail);");
+                        $createThrash = $connection->prepare("INSERT INTO library (displayName, ownerEmail) VALUES ('trash', :ownerEmail);");
                         $createThrash->bindParam(':ownerEmail', $email);
                         $createThrash->execute();
                         $createUnfiled = $connection->prepare("INSERT INTO library (displayName, ownerEmail) VALUES ('unfiled', :ownerEmail);");
