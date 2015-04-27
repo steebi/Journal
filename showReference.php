@@ -51,7 +51,7 @@ and open the template in the editor.
                     <label for='author'>
                         *Author:
                     </label></br>
-                    <input name = 'author' type='text' id='author' class='inputFullWidth' value=<?php $var = $reference[0]['author']; echo "$var"; ?>/>
+                    <input name = 'author' type='text' id='author' class='inputFullWidth' value=<?php $var = $reference[0]['author']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='publishDate'>
@@ -72,7 +72,7 @@ and open the template in the editor.
                             <option value = "12"<?php if($reference[0]['title']== 12); echo "selected=\"selected\""; ?>>December</option>
                         </select>
                         *Year:
-                        <input name='publishYear' type='text' id='publishYear'value=<?php $var = $reference[0]['publishYear']; echo "$var"; ?>>
+                        <input name='publishYear' type='text' id='publishYear'value=<?php $var = $reference[0]['publishYear']; echo "\"$var\""; ?>>
                     </label></br>
                 </p>
                 
@@ -82,7 +82,7 @@ and open the template in the editor.
                     <label for='url'>
                         url:
                     </label></br>
-                    <input name = 'url' type='text' id='url' class='inputFullWidth' value=<?php $var = $reference[0]['url']; echo "$var"; ?>/>
+                    <input name = 'url' type='text' id='url' class='inputFullWidth' value=<?php $var = $reference[0]['url']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='abstract'>
@@ -106,49 +106,49 @@ and open the template in the editor.
                     <label for='bookTitle'>
                         Book title:
                     </label></br>
-                    <input name = 'bookTitle' type='text' id='bookTitle' class='inputFullWidth' value=<?php $var = $reference[0]['bookTitle']; echo "$var"; ?>/>
+                    <input name = 'bookTitle' type='text' id='bookTitle' class='inputFullWidth' value=<?php $var = $reference[0]['bookTitle']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='chapter'>
                         Chapter:
                     </label></br>
-                    <input name = 'chapter' type='text' id='chapter' class='inputFullWidth' value=<?php $var = $reference[0]['chapter']; echo "$var"; ?>/>
+                    <input name = 'chapter' type='text' id='chapter' class='inputFullWidth' value=<?php $var = $reference[0]['chapter']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='crossReference'>
                         Cross reference:
                     </label></br>
-                    <input name = 'crossReference' type='text' id='crossReference' class='inputFullWidth' value=<?php $var = $reference[0]['crossReference']; echo "$var"; ?>/>
+                    <input name = 'crossReference' type='text' id='crossReference' class='inputFullWidth' value=<?php $var = $reference[0]['crossReference']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='edition'>
                         Edition:
                     </label></br>
-                    <input name = 'edition' type='text' id='edition' class='inputFullWidth' value=<?php $var = $reference[0]['edition']; echo "$var"; ?>/>
+                    <input name = 'edition' type='text' id='edition' class='inputFullWidth' value=<?php $var = $reference[0]['edition']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='eprint'>
                         E print:
                     </label></br>
-                    <input name = 'eprint' type='text' id='eprint' class='inputFullWidth' value=<?php $var = $reference[0]['eprint']; echo "$var"; ?>/>
+                    <input name = 'eprint' type='text' id='eprint' class='inputFullWidth' value=<?php $var = $reference[0]['eprint']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='institution'>
                         Institution:
                     </label></br>
-                    <input name = 'institution' type='text' id='institution' class='inputFullWidth' value=<?php $var = $reference[0]['insitution']; echo "$var"; ?>/>
+                    <input name = 'institution' type='text' id='institution' class='inputFullWidth' value=<?php $var = $reference[0]['insitution']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='journal'>
                         Journal:
                     </label></br>
-                    <input name = 'journal' type='text' id='journal' class='inputFullWidth' value=<?php $var = $reference[0]['journal']; echo "$var"; ?>/>
+                    <input name = 'journal' type='text' id='journal' class='inputFullWidth' value=<?php $var = $reference[0]['journal']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='bibtexKey'>
                         Bibtex key:
                     </label></br>
-                    <input name = 'bibtexKey' type='text' id='bibtexKey' class='inputFullWidth' value=<?php $var = $reference[0]['bibtexKey']; echo "$var"; ?>/>
+                    <input name = 'bibtexKey' type='text' id='bibtexKey' class='inputFullWidth' value=<?php $var = $reference[0]['bibtexKey']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='NOTE'>
@@ -160,43 +160,43 @@ and open the template in the editor.
                     <label for='issueNumber'>
                         Issue number:
                     </label></br>
-                    <input name = 'issueNumber' type='text' id='issueNumber' class='inputFullWidth' value=<?php $var = $reference[0]['issueNumber']; echo "$var"; ?>/>
+                    <input name = 'issueNumber' type='text' id='issueNumber' class='inputFullWidth' value=<?php $var = $reference[0]['issueNumber']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='organisation'>
                         Organisation:
                     </label></br>
-                    <input name = 'organisation' type='text' id='organisation' class='inputFullWidth' value=<?php $var = $reference[0]['organisation']; echo "$var"; ?>/>
+                    <input name = 'organisation' type='text' id='organisation' class='inputFullWidth' value=<?php $var = $reference[0]['organisation']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='Publisher'>
                         Publisher:
                     </label></br>
-                    <input name = 'Publisher' type='text' id='Publisher' class='inputFullWidth' value=<?php $var = $reference[0]['Publisher']; echo "$var"; ?>/>
+                    <input name = 'Publisher' type='text' id='Publisher' class='inputFullWidth' value=<?php $var = $reference[0]['Publisher']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='school'>
                         School:
                     </label></br>
-                    <input name = 'school' type='text' id='school' class='inputFullWidth' value=<?php $var = $reference[0]['school']; echo "$var"; ?>/>
+                    <input name = 'school' type='text' id='school' class='inputFullWidth' value=<?php $var = $reference[0]['school']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='series'>
                         Series:
                     </label></br>
-                    <input name = 'series' type='text' id='series' class='inputFullWidth' value=<?php $var = $reference[0]['series']; echo "$var"; ?>/>
+                    <input name = 'series' type='text' id='series' class='inputFullWidth' value=<?php $var = $reference[0]['series']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='publishType'>
                         Publish type:
                     </label></br>
-                    <input name = 'publishType' type='text' id='publishType' class='inputFullWidth' value=<?php $var = $reference[0]['publishType']; echo "$var"; ?>/>
+                    <input name = 'publishType' type='text' id='publishType' class='inputFullWidth' value=<?php $var = $reference[0]['publishType']; echo "\"$var\""; ?>/>
                 </p>
                 <p>
                     <label for='volume'>
                         Volume:
                     </label></br>
-                    <input name = 'volume' type='text' id='volume' class='inputFullWidth' value=<?php $var = $reference[0]['volume']; echo "$var"; ?>/>
+                    <input name = 'volume' type='text' id='volume' class='inputFullWidth' value=<?php $var = $reference[0]['volume']; echo "\"$var\""; ?>/>
                 </p>
                 
                 
