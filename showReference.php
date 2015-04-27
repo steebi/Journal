@@ -88,19 +88,19 @@ and open the template in the editor.
                     <label for='abstract'>
                         Abstract:
                     </label></br>
-                    <textarea name = 'abstract' rows='5' type='text' id='abstract' class='inputFullWidth' value=<?php $var = $reference[0]['abstract']; echo "$var"; ?>></textarea>
+                    <textarea name = 'abstract' rows='5' type='text' id='abstract' class='inputFullWidth' ><?php $var = $reference[0]['abstract']; echo "$var"; ?></textarea>
                 </p>
                 <p>
                     <label for='address'>
                         Address:
                     </label></br>
-                    <textarea name = 'address' rows='5' type='text' id='address' class='inputFullWidth' value=<?php $var = $reference[0]['address']; echo "$var"; ?>></textarea>
+                    <textarea name = 'address' rows='5' type='text' id='address' class='inputFullWidth' ><?php $var = $reference[0]['address']; echo "$var"; ?></textarea>
                 </p>
                 <p>
                     <label for='annote'>
                         Annote:
                     </label></br>
-                    <textarea name = 'annote' rows='5' type='text' id='annote' class='inputFullWidth' value=<?php $var = $reference[0]['annote']; echo "$var"; ?>></textarea>
+                    <textarea name = 'annote' rows='5' type='text' id='annote' class='inputFullWidth' ><?php $var = $reference[0]['annote']; echo "$var"; ?></textarea>
                 </p>
                 <p>
                     <label for='bookTitle'>
@@ -154,7 +154,7 @@ and open the template in the editor.
                     <label for='NOTE'>
                         Notes:
                     </label></br>
-                    <textarea name = 'NOTE' rows='5' type='text' id='NOTE' class='inputFullWidth' value=<?php $var = $reference[0]['NOTE']; echo "$var"; ?>></textarea>
+                    <textarea name = 'NOTE' rows='5' type='text' id='NOTE' class='inputFullWidth' ><?php $var = $reference[0]['NOTE']; echo "$var"; ?></textarea>
                 </p>
                 <p>
                     <label for='issueNumber'>
