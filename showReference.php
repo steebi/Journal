@@ -39,7 +39,7 @@ and open the template in the editor.
         
         <div id = "insertReference" class = "newReferenceForm">
             <h1>New Reference</h1>
-            <form action="newEntryControls.php" method='post'>
+            <form action="showReferenceControls.php?refID=<?php $libIDPass = $_GET['libID']; echo "$libIDPass"; ?>" method='post'>
                 <p>
                     <label for='title'>
                         *Title:
