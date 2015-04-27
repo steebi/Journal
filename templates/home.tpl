@@ -83,6 +83,8 @@
                     </br>
                     <hr>
                 </div>
+                            
+                            
                 
             </div>
             
@@ -92,8 +94,13 @@
             
             
             <div id="mainContent">
+                
+                <form action='home.php' method="get">
+                    <input type="submit" class="submit" name="action" value="Empty Trash">
+                </form>
+                
                 <form action="home.php" method="get">
-                    <select name='libID'>
+                    <select name='libID' class='right'>
                         {foreach from=$libraries item=row}
                             <option value="{$row.0}"{if $row.1 eq 'unfiled'}selected='selected'{/if}>{$row.1}</option>
                         {/foreach}

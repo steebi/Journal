@@ -121,6 +121,11 @@ function searchLibraries($email, $title, $author, $year){
     }
 }
 
+
+/*
+ * This function is to delete a library from the database. First it will move all the references
+ * to the trash folder that are stored in the library to be deleted. Once that is done it will then delete the library
+ */
 function moveSelectedToLibrary($email, $libID, $referenceID){
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
@@ -162,7 +167,7 @@ function deleteLibrary($email, $libID){
         $trashID->bindParam(":email", $email);
         $trashID->execute();
         $trash = $trashID->fetch();
-        print_r($trash);
+        //print_r($trash);
         
         //use trash id to move all the references with th library ID to b deleted to trash
         $moveOldReferences = $connection->prepare("UPDATE reference SET libID = :trash WHERE libID = :deleteLib");
@@ -176,5 +181,25 @@ function deleteLibrary($email, $libID){
         $delete->execute();
     }   catch(PDOException $e){
         echo $e->getMessage();
+    }
+}
+
+/*
+ * This function empties the trash folder. This will permanently delete all the entries in the trash folder!
+ */
+function emptyTrash($email){
+    try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        //first get the id of the trash folder
+        $trashID = $connection->prepare("SELECT id FROM library WHERE ownerEmail = :email AND displayName = 'trash';" );
+        $trashID->bindParam(":email", $email);
+        $trashID->execute();
+        $trash = $trashID->fetch();
+
+        //now delete all the references with that libID
+        $delete = $connection->prepare("DELETE FROM reference WHERE libID = :trashID");
+        $delete->bindParam(":trashID", $trash[0]);
+    }   catch(PDOException $e){
+        $e->getMessage();
     }
 }

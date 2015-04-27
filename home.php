@@ -41,6 +41,11 @@
                 break;
             case 'Delete Library':
                 deleteLibrary($mail, $_GET['libID']);
+                header("Location: home.php");
+                exit;
+            case 'Empty Trash':
+                emptyTrash($mail);
+                header("Location: home.php");
                 exit;
         }
         
