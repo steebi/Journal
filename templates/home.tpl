@@ -77,7 +77,6 @@
             <div id="mainContent">
                 <form action="home.php" method="get">
                     <select name='libID'>
-                        <option value="all" selected="selected">All libraries</option>
                         {foreach from=$libraries item=row}
                             <option value="{$row.0}">{$row.1}</option>
                         {/foreach}
@@ -94,7 +93,7 @@
                         </tr>
                         {foreach from=$references item=reference}
                             <tr>
-                                <td><input type='checkbox' name='referenceID' value='{$reference['id']}'></td>
+                                <td><input type='checkbox' name='referenceID[]' value='{$reference['id']}'></td>
                                 <td>{$reference['author']}</td>
                                 <td>{$reference['title']}</td>
                                 <td>{$reference['publishYear']}</td>
