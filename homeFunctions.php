@@ -135,7 +135,9 @@ function moveSelectedToLibrary($email, $libID, $referenceID){
     }
 }
 
-
+/*
+ * This function returns the libraries that the user is allowed to delete from the database only
+ */
 function returnDelLib($email){
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
@@ -144,6 +146,14 @@ function returnDelLib($email){
         $sql->execute();
         
         return $sql->fetchAll();
+    }   catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function deleteLibrary($email, $libID){
+    try{
+        
     }   catch(PDOException $e){
         echo $e->getMessage();
     }

@@ -46,25 +46,6 @@
                         <input type='submit' class='submit right' name='action' value='Change Library'>
                     </form>
                 </div>
-                
-                <div class="controlsList">
-                    <form action="home.php" method="get">
-                        <label for='changeLibrary'>Delete Library:
-                            <select name='libID'>
-                                {foreach from=$deleteableLibraries item=row}
-                                    <option value="{$row.0}">{$row.1}</option>
-                                {/foreach}
-                            </select>
-                        </label>
-                        </br>
-                        </br>
-                        <input type='submit' class='submit right' name='action' value='Delete Library'>
-                    </form>
-                    </br>
-                    </br>
-                    <hr>
-                </div>
-                            
                 </br>
                 <hr>
                 
@@ -79,6 +60,24 @@
                         <p>    
                             <input type='submit' class='submit right' name='action' value='Search Libraries' />
                         </p>
+                    </form>
+                    </br>
+                    </br>
+                    <hr>
+                </div>
+                
+                <div class="controlsList">
+                    <form action="home.php" method="get">
+                        <label for='changeLibrary'>Delete Library:
+                            <select name='libID'>
+                                {foreach from=$deleteableLibraries item=row}
+                                    <option value="{$row.0}">{$row.1}</option>
+                                {/foreach}
+                            </select>
+                        </label>
+                        </br>
+                        </br>
+                        <input type='submit' class='submit right' name='action' value='Delete Library'>
                     </form>
                     </br>
                     </br>
