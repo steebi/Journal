@@ -57,20 +57,20 @@ and open the template in the editor.
                         <select name='publishMonth'>
                             <option value= ""> --- </option>
                             <option value = "1"<?php if($reference[0]['title']== 1); echo "selected=\"selected\""; ?>>January</option>
-                            <option value = "2">February</option>
-                            <option value = "3">March</option>
-                            <option value = "4">April</option>
-                            <option value = "5">May</option>
-                            <option value = "6">June</option>
-                            <option value = "7">July</option>
-                            <option value = "8">August</option>
-                            <option value = "9">September</option>
-                            <option value = "10">October</option>
-                            <option value = "11">November</option>
-                            <option value = "12">December</option>
+                            <option value = "2"<?php if($reference[0]['title']== 2); echo "selected=\"selected\""; ?>>February</option>
+                            <option value = "3"<?php if($reference[0]['title']== 3); echo "selected=\"selected\""; ?>>March</option>
+                            <option value = "4"<?php if($reference[0]['title']== 4); echo "selected=\"selected\""; ?>>April</option>
+                            <option value = "5"<?php if($reference[0]['title']== 5); echo "selected=\"selected\""; ?>>May</option>
+                            <option value = "6"<?php if($reference[0]['title']== 6); echo "selected=\"selected\""; ?>>June</option>
+                            <option value = "7"<?php if($reference[0]['title']== 7); echo "selected=\"selected\""; ?>>July</option>
+                            <option value = "8"<?php if($reference[0]['title']== 8); echo "selected=\"selected\""; ?>>August</option>
+                            <option value = "9"<?php if($reference[0]['title']== 9); echo "selected=\"selected\""; ?>>September</option>
+                            <option value = "10"<?php if($reference[0]['title']== 10); echo "selected=\"selected\""; ?>>October</option>
+                            <option value = "11"<?php if($reference[0]['title']== 11); echo "selected=\"selected\""; ?>>November</option>
+                            <option value = "12"<?php if($reference[0]['title']== 12); echo "selected=\"selected\""; ?>>December</option>
                         </select>
                         *Year:
-                        <input name='publishYear' type='text' id='publishYear'>
+                        <input name='publishYear' type='text' id='publishYear'value=<?php $var = $reference[0]['publishYear']; echo "$var"; ?>>
                     </label></br>
                 </p>
                 
@@ -80,13 +80,13 @@ and open the template in the editor.
                     <label for='url'>
                         url:
                     </label></br>
-                    <input name = 'url' type='text' id='url' class='inputFullWidth' />
+                    <input name = 'url' type='text' id='url' class='inputFullWidth' value=<?php $var = $reference[0]['url']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='abstract'>
                         Abstract:
                     </label></br>
-                    <textarea name = 'abstract' rows='5' type='text' id='abstract' class='inputFullWidth' ></textarea>
+                    <textarea name = 'abstract' rows='5' type='text' id='abstract' class='inputFullWidth' value=<?php $var = $reference[0]['abstract']; echo "$var"; ?>></textarea>
                 </p>
                 <p>
                     <label for='address'>
