@@ -213,7 +213,9 @@ function returnReference($email, $refID){
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
         $query = $connection->prepare("SELECT * FROM reference WHERE id = :refID;");
         $query->bindParam(":refID", $refID);
+        echo "binding parmaeter";
         $success = $query->execute();
+        echo "Executed statement";
         $results =  $query->fetchAll();
         if($success){
             echo "WOWOWOWOW";
