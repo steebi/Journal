@@ -38,10 +38,12 @@ and open the template in the editor.
             <span class="right"><a href="/upDateDetails.php"><?php echo "$userName"; ?></a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
         
-        <div id = "insertReference" class = "centerForm">
-            <h1>Entry successfully saved!</h1>
-            <p>Your entry has been successfully entered into your library.</p>
-            <p><a href = "home.php">Return home!</a></p>
+        <div id = "insertReference" class = "centerForm"><?php
+            echo "<div><ul>";
+                foreach($reference as $id){
+                   echo "<li>$id</li>";
+                }
+            echo "</ul></div>";?>
         </div>
     </body>
 </html>
