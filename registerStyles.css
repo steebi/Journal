@@ -1,7 +1,11 @@
 /*
-*   
+*   This css file includes stylings for all the pages in this project!
 */
 
+/*
+    This css centers an element in the middle of the page and gives it a 
+    border. It also aligns the text inside to be center justidied.
+*/
 .centerForm {
     border-radius: 25px;
     border: 2px solid #050A0F;
@@ -14,6 +18,10 @@
     text-align: center;
 }
 
+/*
+    This does the same as the previous css, but it also sets the width of the
+    element to be 500px. 
+*/
 .newReferenceForm {
     border-radius: 25px;
     border: 2px solid #050A0F;
@@ -23,28 +31,46 @@
     margin: -100px 0 0 -250px;
     top: 30%;
     left: 50%;
+    margin-bottom: 50px;
 }
 
+/*
+    Aligns the heading in newReferenceForm to center
+*/
 .newReferenceForm h1{
     text-align: center;
 }
 
+/*
+    Sets the widthe to full length and floats to the right. This is for input boxes
+*/
 .inputFullWidth {
     float:right;
     width:100%;
     margin:10px;
 }
 
+/*
+    Floats an element to th right and gives it some padding. This is for elements
+    in the heading, so they are within the ehader
+*/
 .right{
     float:right;
     padding-right: 20px;
 }
 
+/*
+    Sets the links in the header to white so it is readable
+*/
 #header a{
     color:white;
     text-decoration: none;
 }
 
+/*
+    CSS for the header of the site. Sets text to white and background to dark blue
+    colour
+*/
 #header {
     padding-left: 20px;
     background-color:#050A0F;
@@ -55,15 +81,24 @@
     padding: 5px;
 }
 
+/*
+    CSS to make errors appear in red letters
+*/
 .errors{
     color: red; 
 }
 
+/*
+    sets the display to block for checkboxes
+*/
 .checkboxlabel {
     display: block;
     padding-left: 15px;
     text-indent: -15px;
 }
+/*
+    CSS for the input beside the check boxes
+*/
 .checkboxinput {
     width: 13px;
     height: 13px;
@@ -75,13 +110,27 @@
     *overflow: hidden;
 }
 
+/*
+    CSS for the input text areas. Sets the padding to 9 so writing more clearly inside the
+    box elemetns. The border is given a solid black so its clear 
+*/
 input, textarea { 
     padding: 9px; 
     border: solid 1px black; 
-    font: normal 13px/100% Verdana, sans-serif; 
-    width: 200px; 
+    width: 100%; 
     } 
     
+    /*
+        This rule is to make an exception for the publish year
+        input box on the newEntry form, which is inline
+    */
+    #publishYear{
+        width:250px;
+    }
+    
+/*
+    CSS styling for the submit button
+*/
 .submit { 
     width: auto;
     min-width: 80px;
@@ -90,7 +139,35 @@ input, textarea {
     font-size: 14px; 
     color: #FFFFFF;
     }
-    
+/*
+    CSS used on newEntry page to center the submit button. As the text alignment
+    for that page is not centered.
+*/
     .submitButton{
         text-align: center;
     }
+
+    /*
+        This sets the sidebar to be to the left always
+    */
+#sidebar {
+    border-right: 1px solid lightgrey; 
+    margin-left: 10px;
+    width: 300px;
+    background-color:#D3D3D3;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    bottom: 10px;
+    padding:10px;
+}
+
+#mainContent{
+    margin-left: 340px;
+    margin-top: 30px;
+}
+
+#mainContent table{
+    width: 100%;
+}
+

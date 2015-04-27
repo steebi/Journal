@@ -32,7 +32,6 @@
                     }   else if(filter_input(INPUT_POST, 'email') == ''){
                         $_SESSION['error']['login']="The email field was left blank!";
                     }   else{
-                        echo "Skipped all that shit!";
                         try{
                             //first tests to see if the username is in the database
                             $email = trim(filter_input(INPUT_POST, 'email'));

@@ -8,12 +8,88 @@
     <body>
         <?php
             session_start();
+            require_once 'database.php';
             if($_SESSION['user_email'] == ''){
                 header("Location: index.php");
                 exit;
             }
             $userName = $_SESSION['user_name'];
             $mail = $_SESSION['user_email'];
+            
+            //two string variables, one stores the names of the elements to insert
+            //The other contains the values of these elements to insert
+            $elements = "";
+            $elementsBindVar = "";
+            
+            $inputError = FALSE;
+            
+            //first validate that the essential fields have been filled in. These are
+            //title, author, year and library.
+            if(filter_input(INPUT_POST, 'title') == ''){
+                $_SESSION['error']['title'] = "Title cannot be left blank!";
+                $inputError = TRUE;
+            }
+            if(filter_input(INPUT_POST, 'author') == ''){
+                $_SESSION['error']['author'] = "Author cannot be left blank!";
+                $inputError = TRUE;
+            }
+            if(filter_input(INPUT_POST, 'publishYear') == ''){
+                $_SESSION['error']['year'] = "Year cannot be left blank!";
+                $inputError = TRUE;
+            }
+            if(!preg_match("/^[0-9]{4}$/", filter_input(INPUT_POST, 'publishYear'))){
+                $_SESSION['error']['year'] = "Year must be a 4 digit number year!";
+                $inputError = TRUE;
+            }
+            
+            //all these dates are the important ones, if they are valid then we 
+            //can inser them into the database otherwise return an error to the user
+            
+            if($inputError){
+                header("Location: newEntry.php");
+                exit;
+            }
+            
+           
+            //if there was no error then insert into the database
+            foreach($_POST as $key => $value){
+                if($key === "submit"){
+                    break;
+                }
+                $elements .=" $key,";
+                $elementsBindVar .= " :$key,";
+            }
+            $elements = rtrim($elements, ",");
+            $elementsBindVar = rtrim($elementsBindVar, ",");
+            
+            //now the values are stored in the strings we prepare the connection
+            //and bind the parameters
+            try{
+                $insertString = "INSERT INTO reference (".$elements.") VALUES (".$elementsBindVar.");";
+                //echo "$insertString";
+                $insertReference = $connection->prepare($insertString);
+                //this cycles through the data in post it takes the keys and values 
+                //from the array passed by post and binds each parameter according 
+                //to the key passed and then the value used.
+                foreach($_POST as $key => $value){
+                    if($key === "submit"){
+                        break;
+                    }
+                    $currentKey = ":$key";
+                    $insertReference->bindParam($currentKey, $_POST[$key]);
+                }
+                
+                
+                $insertSuccess = $insertReference->execute();
+            }   catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+            
+            if($insertSuccess){
+            }else{
+                $_SESSION['error']['database'] = "There was an error inserting this into the database!";
+            }
+
         ?>
         
         <div id="header" >
@@ -22,18 +98,9 @@
         </div>
         
         <div id = "insertReference" class = "centerForm">
-            <table>
-                <?php foreach ($_POST as $key => $value) {
-                     echo "<tr>";
-                     echo "<td>";
-                     echo $key;
-                     echo "</td>";
-                     echo "<td>";
-                    echo $value;
-                    echo "</td>";
-                    echo "</tr>";
-                }?>
-            </table>
+            <h1>Entry successfully saved!</h1>
+            <p>Your entry has been successfully entered into your library.</p>
+            <p><a href = "home.php">Return home!</a></p>
         </div>
     </body>
 </html>

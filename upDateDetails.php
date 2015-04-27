@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" lang="text/css" href="styles.css"/>
+        <link rel="stylesheet" lang="text/css" href="registerStyles.css"/>
         <title>BibTex</title>
     </head>
     <body>

@@ -3,7 +3,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <link rel="stylesheet" type="text/css" href="registerStyles.css">
+        <title>BibTex</title>
     </head>
     <body>
         <div id="header" >
@@ -11,6 +12,95 @@
             <span class="right"><a href="upDateDetails.php">{$user_name}</a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
        
+        <div class = "container">
+        
+            <div id="sideBar">
+                <div class="controlsList">
+                    <form action='home.php'method='get'>
+                        <p>
+                            <label for='newLibrary'>New Library: <input teype='text' name='libraryName' id='newLibrary'></label></br>
+                        </p>
+                        <p>    
+                            <input type='submit' class='submit right' name='action' value='Create Library' />
+                        </p>
+
+                    </form>
+                </div>
+                
+                </br>
+                </br>
+                <hr>
+                
+                <div class="controlsList">
+                    <form action="home.php" method="get">
+                        <label for='changeLibrary'>Change Library
+                            <select name='libID'>
+                                <option value="all" selected="selected">All libraries</option>
+                                {foreach from=$libraries item=row}
+                                    <option value="{$row.0}">{$row.1}</option>
+                                {/foreach}
+                            </select>
+                        </label>
+                        </br>
+                        </br>
+                        <input type='submit' class='submit right' name='action' value='Change Library'>
+                    </form>
+                </div>
+                
+                </br>
+                <hr>
+                
+                <div class="controlsList">
+                    <form action='home.php'method='get'>
+                        <p>
+                            <label for='search'>Search Libraries:</label></br>
+                            <p>Author name</p><input teype='text' name='searchAuthor' id='search'>
+                            <p>Title</p><input teype='text' name='searchTitle' id='search'>
+                            <p>Year</p><input teype='text' name='searchYear' id='search'>
+                        </p>
+                        <p>    
+                            <input type='submit' class='submit right' name='action' value='Search Libraries' />
+                        </p>
+                    </form>
+                    </br>
+                    </br>
+                    <hr>
+                </div>
+                
+            </div>
+            
+            
+            
+            
+            
+            
+            <div id="mainContent">
+                <table>
+                    <tr>
+                        <th>Select</th>
+                        <th>Author</th>
+                        <th>Title</th>
+                        <th>year</th>
+                        <th>library</th>
+                        <th>url</th>
+                    </tr>
+                    {foreach from=$references item=reference}
+                        <tr>
+                            <td></td>
+                            <td>{$reference['author']}</td>
+                            <td>{$reference['title']}</td>
+                            <td>{$reference['publishYear']}</td>
+                            <td>{$reference['displayName']}</td>
+                            <td>{if $reference['url'] eq ''}<img alt = "external link" src="images/link.png">{else}<a href = {$reference['url']}><img alt = "external link" src="images/link.png"></a>{/if}</td>
+                        </tr>
+                    {/foreach}
+                </table>
+            </div>
+            
+            
+        </div>
+        
+        
     </body>
 </html>
 
