@@ -158,7 +158,7 @@ function deleteLibrary($email, $libID){
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
         //first get this users trash id
-        $trashID = $connection->prepare("SELECT FROM library WHERE ownerEmail = :email AND displayName = 'trash';" );
+        $trashID = $connection->prepare("SELECT id FROM library WHERE ownerEmail = :email AND displayName = 'trash';" );
         $trashID->bindParam(":email", $email);
         $success = $trashID->execute();
         $trashArray = $trashID->fetchAll();
@@ -167,11 +167,12 @@ function deleteLibrary($email, $libID){
         
         //use trash id to move all the references with th library ID to b deleted to trash
         $moveOldReferences = $connection->prepare("UPDATE reference SET libID");
-        
+        /*
         $sql = $connection->prepare("DELETE FROM library WHERE id = :libID;");
         $sql->bindParam(":libID", $libID);
         $sql->execute;
     }   catch(PDOException $e){
-        echo $e->getMessage();
+        echo $e->getMessage();*/
     }
+}
 }
