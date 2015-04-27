@@ -36,6 +36,7 @@ and open the template in the editor.
         </div>
         
         <div id = "insertReference" class = "centerForm"><?php
+            print_r($reference);
             echo "<div><ul>";
                 foreach($reference as $id){
                     foreach($id as $values){
