@@ -45,7 +45,7 @@
                 exit;
             case 'Empty Trash':
                 emptyTrash($mail);
-                //header("Location: home.php");
+                header("Location: home.php");
                 exit;
         }
         

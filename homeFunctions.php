@@ -199,6 +199,7 @@ function emptyTrash($email){
         //now delete all the references with that libID
         $delete = $connection->prepare("DELETE FROM reference WHERE libID = :trashID");
         $delete->bindParam(":trashID", $trash[0]);
+        $delete->execute();
     }   catch(PDOException $e){
         $e->getMessage();
     }
