@@ -75,7 +75,7 @@
             
             
             <div id="mainContent">
-                <form action="reference.php" method="get">
+                <form action="home.php" method="get">
                     <select name='libID'>
                         <option value="all" selected="selected">All libraries</option>
                         {foreach from=$libraries item=row}
