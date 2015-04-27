@@ -37,8 +37,9 @@
                 break;
             case 'Move To':
                 moveSelectedToLibrary($mail, $_GET['libID'], $_GET['referenceID']);
-                
-                }
+                header("Location: home.php");
+                break;
+            }
         
         
         
