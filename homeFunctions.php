@@ -166,7 +166,7 @@ function deleteLibrary($email, $libID){
         
         //use trash id to move all the references with th library ID to b deleted to trash
         $moveOldReferences = $connection->prepare("UPDATE reference SET libID = :trash WHERE libID = :deleteLib");
-        $moveOldReferences->bindParam(":trash", $trash);
+        $moveOldReferences->bindParam(":trash", $trash[0]);
         $moveOldReferences->bindParam(":deleteLib", $libId);
         $moveOldReferences->execute();
         
