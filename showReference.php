@@ -25,9 +25,7 @@ and open the template in the editor.
             
             echo "everything is okay";
             
-            print_r($_GET);
             $reference = returnReference($mail, 22);
-            print_r($reference);
             
             
             //take input from get and load the correct page for that
@@ -42,7 +40,9 @@ and open the template in the editor.
         <div id = "insertReference" class = "centerForm"><?php
             echo "<div><ul>";
                 foreach($reference as $id){
-                   echo "<li>$id</li>";
+                    foreach($id as $values){
+                       echo "<li>$values</li>";
+                    }
                 }
             echo "</ul></div>";?>
         </div>
