@@ -75,26 +75,28 @@
             
             
             <div id="mainContent">
-                <table>
-                    <tr>
-                        <th>Select</th>
-                        <th>Author</th>
-                        <th>Title</th>
-                        <th>year</th>
-                        <th>library</th>
-                        <th>url</th>
-                    </tr>
-                    {foreach from=$references item=reference}
+                <form action="reference.php" method="get">
+                    <table>
                         <tr>
-                            <td></td>
-                            <td>{$reference['author']}</td>
-                            <td>{$reference['title']}</td>
-                            <td>{$reference['publishYear']}</td>
-                            <td>{$reference['displayName']}</td>
-                            <td>{if $reference['url'] eq ''}<img alt = "external link" src="images/link.png">{else}<a href = {$reference['url']}><img alt = "external link" src="images/link.png"></a>{/if}</td>
+                            <th>Select</th>
+                            <th>Author</th>
+                            <th>Title</th>
+                            <th>year</th>
+                            <th>library</th>
+                            <th>url</th>
                         </tr>
-                    {/foreach}
-                </table>
+                        {foreach from=$references item=reference}
+                            <tr>
+                                <td><input type='checkbox' name='referenceID' value='{$reference['id']}'></td>
+                                <td>{$reference['author']}</td>
+                                <td>{$reference['title']}</td>
+                                <td>{$reference['publishYear']}</td>
+                                <td>{$reference['displayName']}</td>
+                                <td>{if $reference['url'] eq ''}<img alt = "external link" src="images/link.png">{else}<a href = {$reference['url']}><img alt = "external link" src="images/link.png"></a>{/if}</td>
+                            </tr>
+                        {/foreach}
+                    </table>
+                </form>
             </div>
             
             

@@ -15,7 +15,7 @@ require_once "database.php";
 function returnAllReferences($email){
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
-        $query = $connection->prepare("SELECT a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE b.ownerEmail = :email AND b.id = a.libID;");
+        $query = $connection->prepare("SELECT a.id, a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE b.ownerEmail = :email AND b.id = a.libID;");
         $query->bindParam(':email', $email);
         $success = $query->execute();
         $results =  $query->fetchAll();
@@ -65,7 +65,7 @@ function filterreferenceByLibrary($email, $libID){
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
         
         if($libID == 'all'){
-            $query = $connection->prepare("SELECT a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE b.ownerEmail = :email AND b.id = a.libID;");
+            $query = $connection->prepare("SELECT a.id, a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE b.ownerEmail = :email AND b.id = a.libID;");
             $query->bindParam(":email", $email);
         }else{
             $query = $connection->prepare("SELECT a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE b.ownerEmail = :email AND b.id = a.libID AND a.libID = :libID;");
@@ -82,7 +82,7 @@ function filterreferenceByLibrary($email, $libID){
 
 function searchLibraries($email, $title, $author, $year){
     try{
-        $sqlStatement = "SELECT a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE ";
+        $sqlStatement = "SELECT a.id, a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE ";
         //first confirm all strings are not empty, if they are callreturnAllreferences
         if(($title == '') && ($author == '') && ($year == '')){
             return returnAllReferences($email);
