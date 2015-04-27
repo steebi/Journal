@@ -170,8 +170,9 @@ function deleteLibrary($email, $libID){
         $moveOldReferences->bindParam(":deleteLib", $libID);
         $moveOldReferences->execute();
         
+        //finlly delete the library itself after the updates have been made
         $delete = $connection->prepare("DELETE FROM library WHERE id = :libID;");
-        $delete->bindParam(":libID", $libID);
+        $moveOldReferences->bindParam(":id", $libID);
         $delete->execute;
     }   catch(PDOException $e){
         echo $e->getMessage();
