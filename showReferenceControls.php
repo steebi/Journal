@@ -49,7 +49,8 @@ and open the template in the editor.
             //can inser them into the database otherwise return an error to the user
             
             if($inputError){
-                header("Location: showReference.php");
+                $refID = $_GET['refID'];
+                header("Location: showReference.php?libID=$refID");
                 exit;
             }
             
@@ -91,6 +92,7 @@ and open the template in the editor.
             }else{
                 $_SESSION['error']['database'] = "There was an error inserting this into the database!";
             }
+            header("Location: home.php");
         ?>
     </body>
 </html>
