@@ -15,6 +15,7 @@ and open the template in the editor.
             //firt confirm user is logged in, if not kick to login screen
             session_start();
             require_once 'database.php';
+            require_once 'homeFunction.php';
             if($_SESSION['user_email'] == ''){
                 header("Location: index.php");
                 exit;

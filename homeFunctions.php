@@ -209,13 +209,19 @@ function emptyTrash($email){
  * Loads a specfic reference and returns as an array
  */
 function returnReference($email, $refID){
-    echo "entering function";
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
-        $query = $connection->prepare("SELECT a.id, a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE b.ownerEmail = :email AND b.id = a.libID;");
-        $query->bindParam(':email', $email);
+        echo "connected!";
+        $query = $connection->prepare("SELECT * FROM reference WHERE id = :refID;");
+        $query->bindParam(":refID", $refID);
+        echo "binding parmaeter";
         $success = $query->execute();
+        echo "Executed statement";
         $results =  $query->fetchAll();
+        if($success){
+            echo "WOWOWOWOW";
+        }
+        print_r($results);
         return $results;
     }   catch(PDOexception $e){
         echo $e->getMessage();
