@@ -119,7 +119,7 @@
                         {foreach from=$references item=reference}
                             <tr>
                                 <td><input type='checkbox' name='referenceID[]' value='{$reference['id']}'></td>
-                                <td>{$reference['author']}</td>
+                                <td><a href = "showReference.php?libID={$reference['id']}">{$reference['author']}</td>
                                 <td>{$reference['title']}</td>
                                 <td>{$reference['publishYear']}</td>
                                 <td>{$reference['displayName']}</td>

@@ -204,3 +204,20 @@ function emptyTrash($email){
         $e->getMessage();
     }
 }
+
+/*
+ * Loads a specfic reference and returns as an array
+ */
+function loadReference($email, $refID){
+    try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        $query = $connection->prepare("SELECT * FROM reference a, library b WHERE b.ownerEmail = :email AND b.id = :refID;");
+        $query->bindParam(':email', $email);
+        $query->bindParam(":refID", $refID);
+        $success = $query->execute();
+        $results =  $query->fetchAll();
+        return $results;
+    }   catch(PDOexception $e){
+        echo $e->getMessage();
+    }
+}
