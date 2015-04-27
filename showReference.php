@@ -23,8 +23,6 @@ and open the template in the editor.
             $userName = $_SESSION['user_name'];
             $mail = $_SESSION['user_email'];
             
-            echo "everything is okay";
-            
             $reference = returnReference($mail, 22);
             
             
@@ -41,7 +39,8 @@ and open the template in the editor.
             echo "<div><ul>";
                 foreach($reference as $id){
                     foreach($id as $values){
-                       echo "<li>$values</li>";
+                        $varType = gettype($id);
+                       echo "<li>$values</li>&nbsp;$varType";
                     }
                 }
             echo "</ul></div>";?>
