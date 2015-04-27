@@ -209,8 +209,10 @@ function emptyTrash($email){
  * Loads a specfic reference and returns as an array
  */
 function returnReference($email, $refID){
+    echo "entering function";
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        echo "connected!";
         $query = $connection->prepare("SELECT * FROM reference WHERE id = :refID;");
         $query->bindParam(":refID", $refID);
         echo "binding parmaeter";
