@@ -76,6 +76,13 @@
             
             <div id="mainContent">
                 <form action="reference.php" method="get">
+                    <select name='libID'>
+                        <option value="all" selected="selected">All libraries</option>
+                        {foreach from=$libraries item=row}
+                            <option value="{$row.0}">{$row.1}</option>
+                        {/foreach}
+                    </select>
+                    <input type='submit' class='submit right' name='action' value='Move To'>
                     <table>
                         <tr>
                             <th>Select</th>
