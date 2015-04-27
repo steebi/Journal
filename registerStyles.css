@@ -58,7 +58,10 @@
     float:right;
     padding-right: 20px;
 }
-
+.left{
+    float:left;
+    padding-left:20px;
+}
 /*
     Sets the links in the header to white so it is readable
 */

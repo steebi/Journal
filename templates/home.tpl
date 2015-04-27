@@ -95,18 +95,18 @@
             
             <div id="mainContent">
                 
-                <form action='home.php' method="get">
+                <form action='home.php' method="get" class="left">
                     <input type="submit" class="submit" name="action" value="Empty Trash">
                 </form>
                 
                 
-                <form action="home.php" method="get">
-                    <select name='libID' class='right'>
+                <form action="home.php" method="get" class="right">
+                    <select name='libID'>
                         {foreach from=$libraries item=row}
                             <option value="{$row.0}"{if $row.1 eq 'unfiled'}selected='selected'{/if}>{$row.1}</option>
                         {/foreach}
                     </select>
-                    <input type='submit' class='submit right' name='action' value='Move To'>
+                    <input type='submit' class='submit' name='action' value='Move To'>
                     <table>
                         <tr>
                             <th>Select</th>
