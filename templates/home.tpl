@@ -99,6 +99,7 @@
                     <input type="submit" class="submit" name="action" value="Empty Trash">
                 </form>
                 
+                
                 <form action="home.php" method="get">
                     <select name='libID' class='right'>
                         {foreach from=$libraries item=row}
