@@ -49,25 +49,6 @@
                 
                 <div class="controlsList">
                     <form action="home.php" method="get">
-                        <label for='changeLibrary'>Change Library:
-                            <select name='libID'>
-                                <option value="all" selected="selected">All libraries</option>
-                                {foreach from=$libraries item=row}
-                                    <option value="{$row.0}">{$row.1}</option>
-                                {/foreach}
-                            </select>
-                        </label>
-                        </br>
-                        </br>
-                        <input type='submit' class='submit right' name='action' value='Change Library'>
-                    </form>
-                </div>
-                            
-                </br>
-                <hr>
-                
-                <div class="controlsList">
-                    <form action="home.php" method="get">
                         <label for='changeLibrary'>Delete Library:
                             <select name='libID'>
                                 {foreach from=$deleteableLibraries item=row}
@@ -78,6 +59,26 @@
                         </br>
                         </br>
                         <input type='submit' class='submit right' name='action' value='Delete Library'>
+                    </form>
+                    </br>
+                    </br>
+                    <hr>
+                </div>
+                            
+                </br>
+                <hr>
+                
+                <div class="controlsList">
+                    <form action='home.php'method='get'>
+                        <p>
+                            <label for='search'>Search Libraries:</label></br>
+                            <p>Author name</p><input teype='text' name='searchAuthor' id='search'>
+                            <p>Title</p><input teype='text' name='searchTitle' id='search'>
+                            <p>Year</p><input teype='text' name='searchYear' id='search'>
+                        </p>
+                        <p>    
+                            <input type='submit' class='submit right' name='action' value='Search Libraries' />
+                        </p>
                     </form>
                     </br>
                     </br>
