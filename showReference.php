@@ -44,7 +44,7 @@ and open the template in the editor.
                     <label for='title'>
                         *Title:
                     </label></br>
-                    <input name = 'title' type='text' id='username' class='inputFullWidth' value=<?php $var = $reference[0]['title']; echo "$var"; ?>/>
+                    <input name = 'title' type='text' id='username' class='inputFullWidth' value=<?php $var = $reference[0]['title']; echo "\"$var\""; ?>/>
                     
                 </p>
                 <p>
