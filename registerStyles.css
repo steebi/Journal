@@ -160,6 +160,7 @@ input, textarea {
     top: 50px;
     bottom: 10px;
     padding:10px;
+    overflow: scroll;
 }
 
 #mainContent{
