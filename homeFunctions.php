@@ -195,7 +195,7 @@ function emptyTrash($email){
         $trashID->bindParam(":email", $email);
         $trashID->execute();
         $trash = $trashID->fetch();
-
+        print_r($trash);
         //now delete all the references with that libID
         $delete = $connection->prepare("DELETE FROM reference WHERE libID = :trashID");
         $delete->bindParam(":trashID", $trash[0]);
