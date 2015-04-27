@@ -150,10 +150,24 @@ function returnDelLib($email){
         echo $e->getMessage();
     }
 }
-
+/*
+ * This deletes a library from the data base
+ * Should first move all the libraries in it to trash and then delete the library
+ */
 function deleteLibrary($email, $libID){
     try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        //first get this users trash id
+        $trashID = $connection->prepare("SELECT FROM library WHERE ownerEmail = :email AND displayName = 'trash';" );
+        $trashID->bindParam(":email", $email);
+        $trashID->execute();
+        $trash = $trashID->fetchAll();
+        print_r($trash);
         
+        /*
+        $sql = $connection->prepare("DELETE FROM library WHERE id = :libID;");
+        $sql->bindParam(":libID", $libID);
+        $sql->execute;*/
     }   catch(PDOException $e){
         echo $e->getMessage();
     }

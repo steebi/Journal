@@ -40,7 +40,7 @@
                 header("Location: home.php");
                 break;
             case 'Delete Library':
-               header("ocation: home.php");
+                deleteLibrary($mail, $_GET['libID']);
                 exit;
         }
         
