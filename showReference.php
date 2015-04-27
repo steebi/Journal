@@ -23,7 +23,9 @@ and open the template in the editor.
             $userName = $_SESSION['user_name'];
             $mail = $_SESSION['user_email'];
             
-            $reference = returnReference($mail, 22);
+            $libID = $_GET['libID'];
+            
+            $reference = returnReference($mail, $libID);
             
             
             //take input from get and load the correct page for that
