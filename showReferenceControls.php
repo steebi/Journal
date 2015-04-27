@@ -89,10 +89,11 @@ and open the template in the editor.
             }
             
             if($insertSuccess){
+                header("Location: home.php");
             }else{
                 $_SESSION['error']['database'] = "There was an error inserting this into the database!";
             }
-            header("Location: home.php");
+            
         ?>
     </body>
 </html>
