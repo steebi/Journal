@@ -195,7 +195,7 @@ function emptyTrash($email){
         $trashID->bindParam(":email", $email);
         $trashID->execute();
         $trash = $trashID->fetch();
-        print_r($trash);
+        //print_r($trash);
         //now delete all the references with that libID
         $delete = $connection->prepare("DELETE FROM reference WHERE libID = :trashID");
         $delete->bindParam(":trashID", $trash[0]);
@@ -211,17 +211,11 @@ function emptyTrash($email){
 function returnReference($email, $refID){
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
-        echo "connected!";
         $query = $connection->prepare("SELECT * FROM reference WHERE id = :refID;");
         $query->bindParam(":refID", $refID);
-        echo "binding parmaeter";
         $success = $query->execute();
-        echo "Executed statement";
         $results =  $query->fetchAll();
-        if($success){
-            echo "WOWOWOWOW";
-        }
-        print_r($results);
+        //print_r($results);
         return $results;
     }   catch(PDOexception $e){
         echo $e->getMessage();
