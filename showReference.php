@@ -22,8 +22,8 @@ and open the template in the editor.
             $userName = $_SESSION['user_name'];
             $mail = $_SESSION['user_email'];
             
-            echo "entering if";
-            $reference = returnReference($mail, $_GET['libID']);
+            print_r($_GET);
+            $reference = returnReference($mail, 22);
             print_r($reference);
             
             
