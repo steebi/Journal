@@ -170,9 +170,9 @@ function deleteLibrary($email, $libID){
         $moveOldReferences->bindParam(":deleteLib", $libID);
         $moveOldReferences->execute();
         
-        $sql = $connection->prepare("DELETE FROM library WHERE id = :libID;");
-        $sql->bindParam(":libID", $libID);
-        $sql->execute;
+        $delete = $connection->prepare("DELETE FROM library WHERE id = :libID;");
+        $delete->bindParam(":libID", $libID);
+        $delete->execute;
     }   catch(PDOException $e){
         echo $e->getMessage();
     }
