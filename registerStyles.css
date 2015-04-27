@@ -178,4 +178,5 @@ input, textarea {
 #dropdownCenter{
     display:table-cell;
     vertical-align: middle;
+    margin: 20px;
 }
