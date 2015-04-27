@@ -34,7 +34,11 @@
                 break;
             case 'Search Libraries':
                 $references = searchLibraries($mail, $_GET['searchTitle'], $_GET['searchAuthor'], $_GET['searchYear']);
-        }
+                break;
+            case 'Move To':
+                moveSelectedToLibrary($mail, $_GET['libID'], $_GET['referenceID']);
+                
+                }
         
         
         

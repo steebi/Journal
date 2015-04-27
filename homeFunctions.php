@@ -121,6 +121,8 @@ function searchLibraries($email, $title, $author, $year){
     }
 }
 
-function moveSelectedToLibrary($email, $libID){
-    
+function moveSelectedToLibrary($email, $libID, $referenceID){
+    foreach($referenceID as $id){
+        echo "$id";
+    }
 }
