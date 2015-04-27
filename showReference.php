@@ -22,11 +22,7 @@ and open the template in the editor.
             $userName = $_SESSION['user_name'];
             $mail = $_SESSION['user_email'];
             
-            print_r($_GET);
-            $var = $_GET['libID'];
-            echo "$var";
-            
-            if(!isset($_GET['libID'])){
+            if(isset($_GET['libID'])){
                 echo "getting reference";
                 $reference = returnReference($mail, $_GET['libID']);
                 print_r($reference);
