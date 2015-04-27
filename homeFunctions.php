@@ -120,3 +120,7 @@ function searchLibraries($email, $title, $author, $year){
         $e->getMessage();
     }
 }
+
+function moveSelectedToLibrary($email, $libID){
+    
+}
