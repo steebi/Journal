@@ -175,3 +175,7 @@ input, textarea {
     width: 100%;
 }
 
+#dropdownCenter{
+    display:table-cell;
+    vertical-align: middle;
+}

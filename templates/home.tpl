@@ -101,11 +101,11 @@
                 
                 
                 <form action="home.php" method="get">
-                    <select name='libID' class="right">
-                        {foreach from=$libraries item=row}
-                            <option value="{$row.0}"{if $row.1 eq 'unfiled'}selected='selected'{/if}>{$row.1}</option>
-                        {/foreach}
-                    </select>
+                        <div id='dropdownCenter'><select name='libID' class="right">
+                            {foreach from=$libraries item=row}
+                                <option value="{$row.0}"{if $row.1 eq 'unfiled'}selected='selected'{/if}>{$row.1}</option>
+                            {/foreach}
+                        </select></div>
                     <input type='submit' class='right submit' name='action' value='Move To'>
                     <table>
                         <tr>
