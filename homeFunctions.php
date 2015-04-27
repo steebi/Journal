@@ -122,11 +122,29 @@ function searchLibraries($email, $title, $author, $year){
 }
 
 function moveSelectedToLibrary($email, $libID, $referenceID){
-    $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
-    $sql = $connection->prepare("UPDATE reference SET libID = :libID WHERE id = :referenceID;");
-    foreach($referenceID as $id){
-        $sql->bindParam(":libID", $libID);
-        $sql->bindParam(":referenceID", $id);
+    try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        $sql = $connection->prepare("UPDATE reference SET libID = :libID WHERE id = :referenceID;");
+        foreach($referenceID as $id){
+            $sql->bindParam(":libID", $libID);
+            $sql->bindParam(":referenceID", $id);
+            $sql->execute();
+        }
+    } catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+
+function returnDelLib($email){
+    try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        $sql = $connection->prepare("SELECT id, displayName FROM library WHERE ownerEmail = :mail AND displayName != 'trash' AND displayName != 'unfiled';");
+        $sql->bindParam(":mail", $email);
         $sql->execute();
+        
+        return $sql->fetchAll();
+    }   catch(PDOException $e){
+        echo $e->getMessage();
     }
 }

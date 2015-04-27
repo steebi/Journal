@@ -49,6 +49,7 @@
     
     //This function is to populate the list of all libraries for the sidebar
     $libraries = returnLibraries($mail);
+    $delLib = returnDelLib($mail);
     
     //print_r($references);
     
@@ -58,6 +59,7 @@
     $template->assign("user_email", $mail);
     $template->assign("user_name", $userName);
     $template->assign("libraries", $libraries);
+    $template->assign("deleteableLibraries", $delLib);
     $template->assign("references", $references);
     $template->display('home.tpl');
 ?>
