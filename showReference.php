@@ -22,7 +22,10 @@ and open the template in the editor.
             $userName = $_SESSION['user_name'];
             $mail = $_SESSION['user_email'];
             
-            if(!isset($_GET['libID']))
+            if(!isset($_GET['libID'])){
+                $var = $_GET['libID'];
+                echo "$var";
+            }
             
             //take input from get and load the correct page for that
             require_once 'homeFunctions.php';
