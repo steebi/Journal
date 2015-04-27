@@ -25,6 +25,8 @@ and open the template in the editor.
             if(!isset($_GET['libID'])){
                 $var = $_GET['libID'];
                 echo "$var";
+                $reference = loadReference($mail, $_GET['libID']);
+                print_r($reference);
             }
             
             //take input from get and load the correct page for that
