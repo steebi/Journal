@@ -211,8 +211,7 @@ function emptyTrash($email){
 function loadReference($email, $refID){
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
-        $query = $connection->prepare("SELECT * FROM reference a, library b WHERE b.ownerEmail = :email AND b.id = :refID;");
-        $query->bindParam(':email', $email);
+        $query = $connection->prepare("SELECT * FROM reference WHERE b.id = :refID;");
         $query->bindParam(":refID", $refID);
         $success = $query->execute();
         $results =  $query->fetchAll();
