@@ -92,6 +92,7 @@ and open the template in the editor.
                 header("Location: home.php");
             }else{
                 $_SESSION['error']['database'] = "There was an error inserting this into the database!";
+                header("Location: showReference.php?libID=$refID");
             }
             
         ?>
