@@ -98,7 +98,6 @@ function searchLibraries($email, $title, $author, $year){
             $sqlStatement .= "publishYear LIKE :year";
         }
         $sqlStatement .= " AND b.ownerEmail = :email AND b.id = a.libID;";
-        echo "$sqlStatement";
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
         $sql = $connection->prepare($sqlStatement);
         if(!($title == '')){
@@ -115,12 +114,8 @@ function searchLibraries($email, $title, $author, $year){
         }
         $sql->bindParam(":email", $email);
         $success = $sql->execute();
-        if($success){
-            echo "yes!";
-        }
         $answer = $sql->fetchAll();
-        print_r($answer);
-        return $sql->fetchAll();
+        return $answer;
     }   catch(PDOException $e){
         $e->getMessage();
     }

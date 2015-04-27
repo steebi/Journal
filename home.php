@@ -45,7 +45,7 @@
     //This function is to populate the list of all libraries for the sidebar
     $libraries = returnLibraries($mail);
     
-    print_r($references);
+    //print_r($references);
     
     $template = new Smarty();
 
