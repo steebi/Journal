@@ -42,70 +42,32 @@ and open the template in the editor.
                     <label for='title'>
                         *Title:
                     </label></br>
-                    <input name = 'title' type='text' id='username' class='inputFullWidth' value=<?php $var = $reference[0]['id']; echo "$var"; ?>/>
+                    <input name = 'title' type='text' id='username' class='inputFullWidth' value=<?php $var = $reference[0]['title']; echo "$var"; ?>/>
                     
                 </p>
                 <p>
                     <label for='author'>
                         *Author:
                     </label></br>
-                    <input name = 'author' type='text' id='author' class='inputFullWidth' />
-                </p>
-                <p>
-                    <label for='Library'>
-                        *Select Library to store reference in:  &nbsp;
-                        <select name='libID'>
-                            
-                            <?php
-                                //First get the unfiled elements
-                                $retrieveUnfiled = $connection->prepare("SELECT id FROM library WHERE ownerEmail = :mail AND displayName = 'unfiled';");
-                                $retrieveUnfiled->bindParam(":mail", $mail);
-                                $retrieveUnfiled->execute();
-                                $unfiledValue = $retrieveUnfiled->fetch();
-                                $unfiledID = $unfiledValue[0];
-                                //print_r($unfiledValue);
-                                //echo "</br></br>";
-                                //populate the list of libraries that are stored in the database at that time
-                                $listLibraries = $connection->prepare("SELECT id, displayName FROM library WHERE ownerEmail = :mail AND NOT(displayName = 'trash') AND NOT(displayName = 'unfiled');");
-                                $listLibraries->bindParam(":mail", $mail);
-                                $listLibraries->execute();
-                                //store the results in an 2-d array. The first index is the element number
-                                //second index is 0 for libraryid and 1 for the library name
-                                //Thrash is excluded from this query as there is no point putting a new file directly into thrash
-                                //The first element should be the unFiled option, so a seperate queries inserts this into the options list
-                                $libraryist = $listLibraries->fetchAll();
-                                //print_r($libraryist);
-                                $value = $libraryist[0]['id'];
-                                //echo "$value";
-
-                                echo "<option value = \"$unfiledID\">un-filed</option>";
-                                foreach($libraryist as $row){
-                                    $id = $row[0];
-                                    $name = $row[1];
-                                    echo "<option value = \"$id\">$name</option>";
-                                }
-                                
-                            ?>
-                        </select>
-                    </label>
+                    <input name = 'author' type='text' id='author' class='inputFullWidth' value=<?php $var = $reference[0]['author']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='publishDate'>
                         *Month:
                         <select name='publishMonth'>
                             <option value= ""> --- </option>
-                            <option value = "01">January</option>
-                            <option value = "01">February</option>
-                            <option value = "01">March</option>
-                            <option value = "01">April</option>
-                            <option value = "01">May</option>
-                            <option value = "01">June</option>
-                            <option value = "01">July</option>
-                            <option value = "01">August</option>
-                            <option value = "01">September</option>
-                            <option value = "01">October</option>
-                            <option value = "01">November</option>
-                            <option value = "01">December</option>
+                            <option value = "1"<?php if($reference[0]['title']== 1); echo "selected=\"selected\""; ?>>January</option>
+                            <option value = "2">February</option>
+                            <option value = "3">March</option>
+                            <option value = "4">April</option>
+                            <option value = "5">May</option>
+                            <option value = "6">June</option>
+                            <option value = "7">July</option>
+                            <option value = "8">August</option>
+                            <option value = "9">September</option>
+                            <option value = "10">October</option>
+                            <option value = "11">November</option>
+                            <option value = "12">December</option>
                         </select>
                         *Year:
                         <input name='publishYear' type='text' id='publishYear'>
