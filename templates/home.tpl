@@ -78,7 +78,7 @@
                 <form action="home.php" method="get">
                     <select name='libID'>
                         {foreach from=$libraries item=row}
-                            <option value="{$row.0}">{$row.1}</option>
+                            <option value="{$row.0}"{if $row.1 eq 'unfiled'}selected='selected'{/if}>{$row.1}</option>
                         {/foreach}
                     </select>
                     <input type='submit' class='submit right' name='action' value='Move To'>
