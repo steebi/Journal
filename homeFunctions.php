@@ -216,6 +216,7 @@ function loadReference($email, $refID){
         $query->bindParam(":refID", $refID);
         $success = $query->execute();
         $results =  $query->fetchAll();
+        print_r($results);
         return $results;
     }   catch(PDOexception $e){
         echo $e->getMessage();
