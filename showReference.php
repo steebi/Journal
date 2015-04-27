@@ -92,109 +92,109 @@ and open the template in the editor.
                     <label for='address'>
                         Address:
                     </label></br>
-                    <textarea name = 'address' rows='5' type='text' id='address' class='inputFullWidth' ></textarea>
+                    <textarea name = 'address' rows='5' type='text' id='address' class='inputFullWidth' value=<?php $var = $reference[0]['address']; echo "$var"; ?>></textarea>
                 </p>
                 <p>
                     <label for='annote'>
                         Annote:
                     </label></br>
-                    <textarea name = 'annote' rows='5' type='text' id='annote' class='inputFullWidth' ></textarea>
+                    <textarea name = 'annote' rows='5' type='text' id='annote' class='inputFullWidth' value=<?php $var = $reference[0]['annote']; echo "$var"; ?>></textarea>
                 </p>
                 <p>
                     <label for='bookTitle'>
                         Book title:
                     </label></br>
-                    <input name = 'bookTitle' type='text' id='bookTitle' class='inputFullWidth' />
+                    <input name = 'bookTitle' type='text' id='bookTitle' class='inputFullWidth' value=<?php $var = $reference[0]['bookTitle']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='chapter'>
                         Chapter:
                     </label></br>
-                    <input name = 'chapter' type='text' id='chapter' class='inputFullWidth' />
+                    <input name = 'chapter' type='text' id='chapter' class='inputFullWidth' value=<?php $var = $reference[0]['chapter']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='crossReference'>
                         Cross reference:
                     </label></br>
-                    <input name = 'crossReference' type='text' id='crossReference' class='inputFullWidth' />
+                    <input name = 'crossReference' type='text' id='crossReference' class='inputFullWidth' value=<?php $var = $reference[0]['crossReference']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='edition'>
                         Edition:
                     </label></br>
-                    <input name = 'edition' type='text' id='edition' class='inputFullWidth' />
+                    <input name = 'edition' type='text' id='edition' class='inputFullWidth' value=<?php $var = $reference[0]['edition']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='eprint'>
                         E print:
                     </label></br>
-                    <input name = 'eprint' type='text' id='eprint' class='inputFullWidth' />
+                    <input name = 'eprint' type='text' id='eprint' class='inputFullWidth' value=<?php $var = $reference[0]['eprint']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='institution'>
                         Institution:
                     </label></br>
-                    <input name = 'institution' type='text' id='institution' class='inputFullWidth' />
+                    <input name = 'institution' type='text' id='institution' class='inputFullWidth' value=<?php $var = $reference[0]['insitution']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='journal'>
                         Journal:
                     </label></br>
-                    <input name = 'journal' type='text' id='journal' class='inputFullWidth' />
+                    <input name = 'journal' type='text' id='journal' class='inputFullWidth' value=<?php $var = $reference[0]['journal']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='bibtexKey'>
                         Bibtex key:
                     </label></br>
-                    <input name = 'bibtexKey' type='text' id='bibtexKey' class='inputFullWidth' />
+                    <input name = 'bibtexKey' type='text' id='bibtexKey' class='inputFullWidth' value=<?php $var = $reference[0]['bibtexKey']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='NOTE'>
                         Notes:
                     </label></br>
-                    <textarea name = 'NOTE' rows='5' type='text' id='NOTE' class='inputFullWidth' ></textarea>
+                    <textarea name = 'NOTE' rows='5' type='text' id='NOTE' class='inputFullWidth' value=<?php $var = $reference[0]['NOTE']; echo "$var"; ?>></textarea>
                 </p>
                 <p>
                     <label for='issueNumber'>
                         Issue number:
                     </label></br>
-                    <input name = 'issueNumber' type='text' id='issueNumber' class='inputFullWidth' />
+                    <input name = 'issueNumber' type='text' id='issueNumber' class='inputFullWidth' value=<?php $var = $reference[0]['issueNumber']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='organisation'>
                         Organisation:
                     </label></br>
-                    <input name = 'organisation' type='text' id='organisation' class='inputFullWidth' />
+                    <input name = 'organisation' type='text' id='organisation' class='inputFullWidth' value=<?php $var = $reference[0]['organisation']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='Publisher'>
                         Publisher:
                     </label></br>
-                    <input name = 'Publisher' type='text' id='Publisher' class='inputFullWidth' />
+                    <input name = 'Publisher' type='text' id='Publisher' class='inputFullWidth' value=<?php $var = $reference[0]['Publisher']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='school'>
                         School:
                     </label></br>
-                    <input name = 'school' type='text' id='school' class='inputFullWidth' />
+                    <input name = 'school' type='text' id='school' class='inputFullWidth' value=<?php $var = $reference[0]['school']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='series'>
                         Series:
                     </label></br>
-                    <input name = 'series' type='text' id='series' class='inputFullWidth' />
+                    <input name = 'series' type='text' id='series' class='inputFullWidth' value=<?php $var = $reference[0]['series']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='publishType'>
                         Publish type:
                     </label></br>
-                    <input name = 'publishType' type='text' id='publishType' class='inputFullWidth' />
+                    <input name = 'publishType' type='text' id='publishType' class='inputFullWidth' value=<?php $var = $reference[0]['publishType']; echo "$var"; ?>/>
                 </p>
                 <p>
                     <label for='volume'>
                         Volume:
                     </label></br>
-                    <input name = 'volume' type='text' id='volume' class='inputFullWidth' />
+                    <input name = 'volume' type='text' id='volume' class='inputFullWidth' value=<?php $var = $reference[0]['volume']; echo "$var"; ?>/>
                 </p>
                 
                 
@@ -224,7 +224,7 @@ and open the template in the editor.
                 <p class='submitButton'>
                     <input class="submit" name='submit' type='submit' value='Submit'/>
                 </p>
-                
+            </form>
         </div>
     </body>
 </html>
