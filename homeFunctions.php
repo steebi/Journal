@@ -160,17 +160,18 @@ function deleteLibrary($email, $libID){
         //first get this users trash id
         $trashID = $connection->prepare("SELECT id FROM library WHERE ownerEmail = :email AND displayName = 'trash';" );
         $trashID->bindParam(":email", $email);
-        $success = $trashID->execute();
-        $trashArray = $trashID->fetchAll();
-        print_r($trash);
-        echo "$success";
+        $trashID->execute();
+        $trash = $trashID->fetch();
         
         //use trash id to move all the references with th library ID to b deleted to trash
-        $moveOldReferences = $connection->prepare("UPDATE reference SET libID");
-        /*
+        $moveOldReferences = $connection->prepare("UPDATE reference SET libID = :trash WHERE libID = :deleteLib");
+        $moveOldReferences->bindParam(":trash", $trash);
+        $moveOldReferences->bindParam(":deleteLib", $libId);
+        $moveOldReferences->execute();
+        
         $sql = $connection->prepare("DELETE FROM library WHERE id = :libID;");
         $sql->bindParam(":libID", $libID);
-        $sql->execute;*/
+        $sql->execute;
     }   catch(PDOException $e){
         echo $e->getMessage();
     }
