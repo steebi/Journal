@@ -77,7 +77,7 @@
                         </label>
                         </br>
                         </br>
-                        <input type='submit' class='submit right' name='action' value='Change Library'>
+                        <input type='submit' class='submit right' name='action' value='Delete Library'>
                     </form>
                     </br>
                     </br>

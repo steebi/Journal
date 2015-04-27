@@ -39,8 +39,10 @@
                 moveSelectedToLibrary($mail, $_GET['libID'], $_GET['referenceID']);
                 header("Location: home.php");
                 break;
-            }
-        
+            case 'Delete Library':
+               header("ocation: home.php");
+                exit;
+        }
         
         
     }   else{
