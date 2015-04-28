@@ -223,4 +223,15 @@ function returnReference($email, $refID){
 }
 
 
-
+function renameLibrary($refID, $name){
+    try{
+        echo "$refID  $name";
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        $query = $connection->prepare("UPDATE library SET displayName = :name WHERE id = :id;");
+        $query->bindParam("::name", $name);
+        $query->bindParam(":id", $refID);
+        $success = $query->execute();
+    }   catch(PDOexception $e){
+        echo $e->getMessage();
+    }
+}

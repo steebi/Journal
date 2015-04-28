@@ -16,6 +16,7 @@
     top: 30%;
     left: 50%;
     text-align: center;
+    margin-bottom: 40px;
 }
 
 /*
@@ -39,15 +40,6 @@
 */
 .newReferenceForm h1{
     text-align: center;
-}
-
-/*
-    Sets the widthe to full length and floats to the right. This is for input boxes
-*/
-.inputFullWidth {
-    float:right;
-    width:100%;
-    margin:10px;
 }
 
 /*
@@ -115,21 +107,39 @@
 
 /*
     CSS for the input text areas. Sets the padding to 9 so writing more clearly inside the
-    box elemetns. The border is given a solid black so its clear 
+    box elements. The border is given a solid black so its more clear and the textareas
+    are prevented from resizing horizontally to prevent expanding byond the form bounds.
 */
-input, textarea { 
+
+input { 
     padding: 9px; 
     border: solid 1px black; 
-    width: 100%; 
-    } 
-    
-    /*
-        This rule is to make an exception for the publish year
-        input box on the newEntry form, which is inline
-    */
-    #publishYear{
-        width:250px;
+    width: 100%;
     }
+textarea{
+    padding: 9px;
+    border: solid 1px black;
+    resize: vertical;
+}
+
+
+
+/*
+    Sets the widthe to full length and floats to the right. This is for input boxes
+*/
+.inputFullWidth {
+    width:100%;
+    margin:10px;
+}
+
+
+/*
+    This rule is to make an exception for the publish year
+    input box on the newEntry form, which is inline
+*/
+#publishYear{
+    width:250px;
+}
     
 /*
     CSS styling for the submit button
@@ -141,6 +151,7 @@ input, textarea {
     border: 0; 
     font-size: 14px; 
     color: #FFFFFF;
+    margin-left: 20px;
     }
 /*
     CSS used on newEntry page to center the submit button. As the text alignment
@@ -163,7 +174,8 @@ input, textarea {
     top: 50px;
     bottom: 10px;
     padding:10px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #mainContent{
@@ -176,7 +188,31 @@ input, textarea {
 }
 
 #dropdownCenter{
-    display:table-cell;
     vertical-align: middle;
     margin: 20px;
+}
+
+.checkBoxInline{
+    display:block;
+}
+
+.tableHeader{
+    background-color:#D3D3D3;
+}
+
+tr{
+    border: 3px solid black;
+    padding: 5px;
+}
+
+td a {
+    color:black;
+    text-decoration: none;
+    height:100%;
+    width:100%;
+    display:block;
+}
+
+tr.hover:hover {
+    background-color: #617798;
 }
