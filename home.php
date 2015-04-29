@@ -62,7 +62,7 @@
             case 'Remove SharedUser':
                 removeSharedUser($_GET['selectSharedUser']);
                 $references = filterreferenceByLibrary($mail, $_GET['libID']);
-                header("Location: home.php?libID=".$_GET['libID']."&action=Change+Library");
+                //header("Location: home.php?libID=".$_GET['libID']."&action=Change+Library");
                 break;
         }
         

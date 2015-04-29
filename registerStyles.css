@@ -245,3 +245,7 @@ th[data-sort]{
     .selectSharedUser{
         width:250px;
     }
+    
+    select{
+        border: 1px solid black;
+    }

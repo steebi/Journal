@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-29 01:54:41
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-29 16:49:43
          compiled from ".\templates\homeShare.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:18044554015df4f3462-15544639%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '12448eb1841567af06e171bf6a4c2d96762ee973' => 
     array (
       0 => '.\\templates\\homeShare.tpl',
-      1 => 1430265276,
+      1 => 1430318982,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'user_name' => 0,
-    'libraries' => 0,
-    'row' => 0,
     'references' => 0,
     'reference' => 0,
   ),
@@ -70,7 +68,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     </head>
     <body>
         <div id="header" >
-            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a></span>
+            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a>&nbsp;|&nbsp;<span><a href="homeShare.php">Shared Libraries</a></span>
             <span class="right"><a href="upDateDetails.php"><?php echo $_smarty_tpl->tpl_vars['user_name']->value;?>
 </a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
@@ -80,21 +78,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div id="sideBar">
                 
                 <div class="controlsList">
-                    <form action='home.php'method='get'>
+                    <form action='homeShare.php'method='get'>
                         <p>
-                            <label for='search'>Search Libraries:</label>
-                            <select name='libID'>
-                                <option value="all" selected="selected">All libraries</option>
-                                <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['libraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
-$_smarty_tpl->tpl_vars['row']->_loop = true;
-?>
-                                    <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value[0];?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value[1];?>
-</option>
-                                <?php } ?>
-                            </select>
+                            <label for='search'>Search Shared Libraries:</label>
                             <p>Author name</p><input type='text' name='searchAuthor' id='search'>
                             <p>Title</p><input type='text' name='searchTitle' id='search'>
                             <p>Year</p><input type='text' name='searchYear' id='search'>

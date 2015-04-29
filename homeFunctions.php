@@ -80,8 +80,13 @@ function filterreferenceByLibrary($email, $libID){
     }
 }
 
+/*
+ * Function to search the libraries. Returns an array of the elements matched by
+ * title, author, year and library
+ */
 function searchLibraries($email, $title, $author, $year, $libID){
     try{
+        
         $sqlStatement = "SELECT a.id, a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE ";
         //first confirm all strings are not empty, if they are callreturnAllreferences
         if(($title == '') && ($author == '') && ($year == '')){
@@ -332,6 +337,9 @@ function removeSharedUser($id){
     }
 }
 
+/*
+ * Returns all the that have been shared with the user email passed to it
+ */
 function returnSharedLibraries($email){
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
@@ -341,5 +349,58 @@ function returnSharedLibraries($email){
         return $query->fetchAll();
     }   catch(PDOexception $e){
         echo $e->getMessage();
+    }
+}
+
+/*
+ * This search function will only return elements from shared libraries to the output
+*/
+function searchSharedLibraries($email, $title, $author, $year, $libID){
+    try{
+        
+        $sqlStatement = "SELECT b.ownerEmail, a.id, a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b, shareLib c WHERE ";
+        //first confirm all strings are not empty, if they are callreturnAllreferences
+        if(($title == '') && ($author == '') && ($year == '')){
+            return returnAllReferences($email);
+        }
+        //now add the strings that are not left blank
+        if(!($title == '')){
+            $sqlStatement .= "a.title LIKE :title";
+        }
+        if(!($author == '')){
+            $sqlStatement .= "a.author LIKE :author";
+        }
+        if(!($year == '')){
+            $sqlStatement .= "a.publishYear LIKE :year";
+        }
+        
+        if(!($libID == 'all')){
+            $sqlStatement .= " AND a.libID = :libID";
+        }
+        
+        $sqlStatement .= " AND b.id = a.libID AND c.sharedUser = :shareEmail AND c.libID = a.libID;";
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        $sql = $connection->prepare($sqlStatement);
+        if(!($title == '')){
+            $title = "%".$title."%";
+            $sql->bindParam(":title", $title);
+        }
+        if(!($author == '')){
+            $author = "%".$author."%";
+            $sql->bindParam("author", $author);
+        }
+        if(!($year == '')){
+            $year = "%".$year."%";
+            $sql->bindParam(":year", $year);
+        }
+        if(!($libID == 'all')){
+            $sql->bindParam(":libID", $libID);
+        }
+        $sql->bindParam(":shareEmail", $email);
+        $success = $sql->execute();
+        $answer = $sql->fetchAll();
+        return $answer;
+    }   catch(PDOException $e){
+        $e->getMessage();
     }
 }

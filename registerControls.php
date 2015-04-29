@@ -107,6 +107,9 @@
                     }   catch(PDOException $e) {
                         echo $e->getMessage();
                     }
+                    
+                    //the following is some email code that I could not get to work unfortunately
+                    
                     /*
                     $to = $email;
                     $subject = "Confirmation from BibMan";
@@ -145,7 +148,7 @@
                 //if the user has been successfully registered then allow them to register and then login
                 if($insertSuccessFull){
                     echo "<p>Complete the registration process by clicking the following link!</p>";
-                    echo "<a href=\"/confirm.php?RegCode=$reg_code\" >Click here to confirm account!</a>";
+                    echo "<a href=\"confirm.php?RegCode=$reg_code\" >Click here to confirm account!</a>";
                 }   else{
                     echo "<p class=\"errors\">There was a problem creating your account. </p>>Try again.</p>";
                 }

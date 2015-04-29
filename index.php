@@ -76,8 +76,8 @@
         ?>
         
         <div id="header" >
-            <span><a href="index.php">Login</a></span>&nbsp;|&nbsp;<span><a href="register.php">Register</a></span>
-            <span class="right">BibTex!</span>
+            <span class="first-command-header"><a href="index.php">Login</a></span>&nbsp;|&nbsp;<span><a href="register.php">Register</a></span>
+            <span class="right">BibMan!</span>
         </div>
         
         <div id = "login-form" class = "centerForm">

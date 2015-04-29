@@ -19,12 +19,13 @@
         switch($_GET['action']){
             case 'Search Libraries':
                 /*ADD THE FUNCTION HERE AND THE REDIRECT OR WHATEVER!!!*/
+                $references = searchSharedLibraries($mail, $_GET['searchTitle'], $_GET['searchAuthor'], $_GET['searchYear'], $_GET['libID']);
+                break;
         }
     }   else{
-        
+        $references = returnSharedLibraries($mail);
     }
     
-    $references = returnSharedLibraries($mail);
     //if the user has selected a library then we will populate the shared user select box
     
     $template = new Smarty();

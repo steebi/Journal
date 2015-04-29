@@ -22,8 +22,8 @@ and open the template in the editor.
             $userName = $_SESSION['user_name'];
         ?>
         <div id="header" >
-                <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a></span>
-                <span class="right"><a href="upDateDetails.php"><?php echo "$userName"; ?></a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
+            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a>&nbsp;|&nbsp;<span><a href="homeShare.php">Shared Libraries</a></span>
+            <span class="right"><a href="upDateDetails.php"><?php echo "$userName"?></a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
         
         <div id = "update-form" class = "centerForm">

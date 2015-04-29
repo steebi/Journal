@@ -34,7 +34,7 @@
     </head>
     <body>
         <div id="header" >
-            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a></span>
+            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a>&nbsp;|&nbsp;<span><a href="homeShare.php">Shared Libraries</a></span>
             <span class="right"><a href="upDateDetails.php">{$user_name}</a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
        
@@ -45,13 +45,7 @@
                 <div class="controlsList">
                     <form action='homeShare.php'method='get'>
                         <p>
-                            <label for='search'>Search Libraries:</label>
-                            <select name='libID'>
-                                <option value="all" selected="selected">All libraries</option>
-                                {foreach from=$libraries item=row}
-                                    <option value="{$row.0}">{$row.1}</option>
-                                {/foreach}
-                            </select>
+                            <label for='search'>Search Shared Libraries:</label>
                             <p>Author name</p><input type='text' name='searchAuthor' id='search'>
                             <p>Title</p><input type='text' name='searchTitle' id='search'>
                             <p>Year</p><input type='text' name='searchYear' id='search'>

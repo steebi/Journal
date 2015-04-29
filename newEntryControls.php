@@ -42,7 +42,12 @@
                 $_SESSION['error']['year'] = "Year must be a 4 digit number year!";
                 $inputError = TRUE;
             }
-            
+            if(filter_input(INPUT_POST, 'url') !=''){
+                if(filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL)===FALSE){
+                    $_SESSION['error']['url'] = "This is not a valid url!";
+                    $inputError = TRUE;
+                }
+            }
             //all these dates are the important ones, if they are valid then we 
             //can inser them into the database otherwise return an error to the user
             
