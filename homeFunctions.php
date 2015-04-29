@@ -80,7 +80,7 @@ function filterreferenceByLibrary($email, $libID){
     }
 }
 
-function searchLibraries($email, $title, $author, $year){
+function searchLibraries($email, $title, $author, $year, $libID){
     try{
         $sqlStatement = "SELECT a.id, a.author, a.title, a.publishYear, b.displayName, a.url FROM reference a, library b WHERE ";
         //first confirm all strings are not empty, if they are callreturnAllreferences
@@ -97,6 +97,11 @@ function searchLibraries($email, $title, $author, $year){
         if(!($year == '')){
             $sqlStatement .= "publishYear LIKE :year";
         }
+        
+        if(!($libID == 'all')){
+            $sqlStatement .= " AND libID = :libID";
+        }
+        
         $sqlStatement .= " AND b.ownerEmail = :email AND b.id = a.libID;";
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
         $sql = $connection->prepare($sqlStatement);
@@ -111,6 +116,9 @@ function searchLibraries($email, $title, $author, $year){
         if(!($year == '')){
             $year = "%".$year."%";
             $sql->bindParam(":year", $year);
+        }
+        if(!($libID == 'all')){
+            $sql->bindParam(":libID", $libID);
         }
         $sql->bindParam(":email", $email);
         $success = $sql->execute();
@@ -211,7 +219,8 @@ function emptyTrash($email){
 function returnReference($email, $refID){
     try{
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
-        $query = $connection->prepare("SELECT * FROM reference WHERE id = :refID;");
+        //$query = $connection->prepare("SELECT * FROM reference WHERE id = :refID;");
+        $query = $connection->prepare("SELECT a.title, a.id, a.author, a.publishYear, a.publishMonth, a.abstract, a.address, a.annote, a.bookTitle, a.chapter, a.crossReference, a.edition, a.eprint, a.institution, a.journal, a.bibtexKey, a.NOTE, a.issueNumber, a.organisation, a.pages, a.Publisher, a.school, a.series, a.publishType, a.volume, a.dataAdded, a.libID, a.url, c.displayName, c.ownerEmail FROM reference a, library c WHERE a.id = :refID AND c.id = a.libID;");
         $query->bindParam(":refID", $refID);
         $success = $query->execute();
         $results =  $query->fetchAll();
@@ -225,12 +234,111 @@ function returnReference($email, $refID){
 
 function renameLibrary($refID, $name){
     try{
-        echo "$refID  $name";
         $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
         $query = $connection->prepare("UPDATE library SET displayName = :name WHERE id = :id;");
-        $query->bindParam("::name", $name);
+        $query->bindParam(":name", $name);
         $query->bindParam(":id", $refID);
         $success = $query->execute();
+    }   catch(PDOexception $e){
+        echo $e->getMessage();
+    }
+}
+
+/*
+ * Share a library with another user.
+ */
+function shareLibrary($libID, $shareMail, $userMail){
+    try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        
+        //first check that the user exists and also that the entry doesn't exist already
+        //the following sql statement returns the controls neccessary for this
+        $userExist = $connection->prepare("SELECT email, reg_code FROM user WHERE email = :email;");
+        $userExist->bindParam(":email", $shareMail);
+        $userExist->execute();
+        $usersPresent = $userExist->fetchAll();
+        $usersFound = count($usersPresent);
+        
+        //the following connection is to ensure the share does not already exist in the system
+        $uniqueEntry = $connection->prepare("SELECT * FROM shareLib WHERE libID = :libID AND sharedUser = :shareMail");
+        $uniqueEntry->bindParam(":libID", $libID);
+        $uniqueEntry->bindParam(":shareMail", $shareMail);
+        $uniqueEntry->execute();
+        $entriesFound = $uniqueEntry->fetchAll();
+        $sameEntriesFound = count($entriesFound);
+        
+        //if there is no user then set an error
+        if($usersFound === 0){
+            //if no such user exists return an error
+            $_SESSION['error']['shareLib'] = "This is not a registered user!";
+        }     
+        else if($usersPresent[0][0] == $userMail ){
+            //if user is the person logged in return an error
+            $_SESSION['error']['shareLib'] = "You cannot share with yourself!";
+        }
+        else if($usersPresent[0][1] != NULL){
+            //if the user being shared with is not registered
+            $_SESSION['error']['shareLib'] = "This user has not confirmed their account!";
+        }
+        else if($sameEntriesFound != 0){
+            $_SESSION['error']['shareLib'] = "This library has already been shared with this user!";
+        }
+        else{
+            //check that the user owns the library
+            $checkUser = $connection->prepare("SELECT ownerEmail FROM library WHERE id=:id");
+            $checkUser->bindParam(":id", $libID);
+            $checkUser->execute();
+            $result = $checkUser->fetch();
+            if($result[0] == $userMail){
+                $query = $connection->prepare("INSERT INTO shareLib (libID, sharedUser) VALUES (:libID, :shareMail);");
+                $query->bindParam(":libID", $libID);
+                $query->bindParam(":shareMail", $shareMail);
+                $query->execute();
+                }   else{
+                    $_SESSION['error']['shareLib'] = "You cannot share other people's libraries!";
+                }
+        }
+    }   catch (PDOException $e){
+        echo $e->getMessage();
+    }
+}
+/*
+ * This function returns all the users that a library is shared with!
+ */
+function returnSharedUsers($email, $libID){
+    try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        $query = $connection->prepare("SELECT * FROM shareLib WHERE libID = :libID;");
+        $query->bindParam(":libID", $libID);
+        $query->execute();
+        $answers = $query->fetchAll();
+        return $answers;
+    }   catch(PDOexception $e){
+        echo $e->getMessage();
+    }
+}
+
+/*
+ * This deletes a shared user from the shared user table
+ */
+function removeSharedUser($id){
+    try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        $query = $connection->prepare("DELETE FROM shareLib WHERE id = :id;");
+        $query->bindParam(":id", $id);
+        $query->execute();
+    }   catch(PDOexception $e){
+        echo $e->getMessage();
+    }
+}
+
+function returnSharedLibraries($email){
+    try{
+        $connection = new PDO('mysql:host=isedbserver.cloudapp.net;port=3306;dbname=user5', "user5", "poi456!!");
+        $query = $connection->prepare("SELECT a.title, a.id, a.author, a.publishYear, a.publishMonth, a.abstract, a.address, a.annote, a.bookTitle, a.chapter, a.crossReference, a.edition, a.eprint, a.institution, a.journal, a.bibtexKey, a.NOTE, a.issueNumber, a.organisation, a.pages, a.Publisher, a.school, a.series, a.publishType, a.volume, a.dataAdded, a.libID, a.url, c.displayName, c.ownerEmail FROM reference a, shareLib b, library c WHERE a.libID = b.libID AND b.libID = c.id AND b.sharedUser = :email;");
+        $query->bindParam(":email", $email);
+        $query->execute();
+        return $query->fetchAll();
     }   catch(PDOexception $e){
         echo $e->getMessage();
     }

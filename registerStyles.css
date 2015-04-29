@@ -121,7 +121,9 @@ textarea{
     border: solid 1px black;
     resize: vertical;
 }
-
+.inputError{
+    border: solid 1px red;
+}
 
 
 /*
@@ -137,8 +139,12 @@ textarea{
     This rule is to make an exception for the publish year
     input box on the newEntry form, which is inline
 */
-#publishYear{
+.publishYear{
     width:250px;
+}
+.publishYearError{
+    width:250px;
+    border: solid 1px red;
 }
     
 /*
@@ -153,6 +159,15 @@ textarea{
     color: #FFFFFF;
     margin-left: 20px;
     }
+    
+    .submit:hover{
+        background-color: #4E5F7A;
+    }
+    
+    .submit:disabled{
+        background-color: #9E9E9F;
+    }
+    
 /*
     CSS used on newEntry page to center the submit button. As the text alignment
     for that page is not centered.
@@ -178,18 +193,12 @@ textarea{
     overflow-x: hidden;
 }
 
-#mainContent{
-    margin-left: 340px;
-    margin-top: 30px;
-}
 
-#mainContent table{
-    width: 100%;
-}
 
 #dropdownCenter{
     vertical-align: middle;
     margin: 20px;
+    background-color: blue;
 }
 
 .checkBoxInline{
@@ -216,3 +225,23 @@ td a {
 tr.hover:hover {
     background-color: #617798;
 }
+
+
+#mainContent{
+    margin-left: 340px;
+    margin-top: 30px;
+    height: 100%;
+    height: auto;
+}
+
+#mainContent table{
+    width: 100%;
+}
+
+th[data-sort]{
+      cursor:pointer;
+    }
+    
+    .selectSharedUser{
+        width:250px;
+    }

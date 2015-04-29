@@ -27,18 +27,44 @@
         <div id = "insertReference" class = "newReferenceForm">
             <h1>New Reference</h1>
             <form action="newEntryControls.php" method='post'>
+                
+                <!--Error handling for any issues when trying to insert some data-->
+                <div class="errors">
+                    <?php
+                        //If an error was passed in session print the error message recorded
+                        if(isset($_SESSION['error'])){
+                            if(isset($_SESSION['error']['title'])){
+                                echo '<p>'.$_SESSION['error']['title'].'</p>';
+                            }
+                            if(isset($_SESSION['error']['author'])){
+                                echo '<p>'.$_SESSION['error']['author'].'</p>';
+                            }
+                            if(isset($_SESSION['error']['year'])){
+                            echo '<p>'.$_SESSION['error']['year'].'</p>';
+                            }
+                            if(isset($_SESSION['error']['database'])){
+                            echo '<p>'.$_SESSION['error']['database'].'</p>';
+                            }
+
+                            
+                        }
+                    ?>
+                </div>
+                
+                
+                
                 <p>
                     <label for='title'>
                         *Title:
                     </label></br>
-                    <input name = 'title' type='text' id='username' class='inputFullWidth' />
+                    <input name = 'title' type='text' id='username' class='inputFullWidth<?php if(isset($_SESSION['error']['title'])){echo" inputError";}?>' />
                     
                 </p>
                 <p>
                     <label for='author'>
                         *Author:
                     </label></br>
-                    <input name = 'author' type='text' id='author' class='inputFullWidth' />
+                    <input name = 'author' type='text' id='author' class='inputFullWidth<?php if(isset($_SESSION['error']['author'])){echo" inputError";}?>' />
                 </p>
                 <p>
                     <label for='Library'>
@@ -97,7 +123,7 @@
                             <option value = "12">December</option>
                         </select>
                         *Year:
-                        <input name='publishYear' type='text' id='publishYear'>
+                        <input name='publishYear' type='text' class='publishYear <?php if(isset($_SESSION['error']['year'])){echo" publishYearError";}?>'>
                     </label></br>
                 </p>
                 
@@ -224,34 +250,14 @@
                     <input name = 'volume' type='text' id='volume' class='inputFullWidth' />
                 </p>
                 
-                
-                <div class="errors">
-                    <?php
-                        //If an error was passed in session print the error message recorded
-                        if(isset($_SESSION['error'])){
-                            if(isset($_SESSION['error']['title'])){
-                                echo '<p>'.$_SESSION['error']['title'].'</p>';
-                            }
-                            if(isset($_SESSION['error']['author'])){
-                                echo '<p>'.$_SESSION['error']['author'].'</p>';
-                            }
-                            if(isset($_SESSION['error']['year'])){
-                            echo '<p>'.$_SESSION['error']['year'].'</p>';
-                            }
-                            if(isset($_SESSION['error']['database'])){
-                            echo '<p>'.$_SESSION['error']['database'].'</p>';
-                            }
-
-                            //unset the error session variable
-                            unset($_SESSION['error']);
-                        }
-                    ?>
-                </div>
-                
                 <p class='submitButton'>
                     <input class="submit" name='submit' type='submit' value='Submit'/>
                 </p>
-                
+             </form>   
         </div>
+        <?php 
+            //unset the error session variable
+            unset($_SESSION['error']);
+        ?>
     </body>
 </html>

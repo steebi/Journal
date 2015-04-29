@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-28 02:53:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-29 01:13:49
          compiled from ".\templates\home.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:190815539048734b6b6-33638628%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'eac3cf626f39945169284be9eb498f874ada9b8e' => 
     array (
       0 => '.\\templates\\home.tpl',
-      1 => 1430182437,
+      1 => 1430262826,
       2 => 'file',
     ),
   ),
@@ -22,6 +22,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'user_name' => 0,
     'libraries' => 0,
     'row' => 0,
+    'sharedUsers' => 0,
+    'sharedUser' => 0,
     'deleteableLibraries' => 0,
     'references' => 0,
     'reference' => 0,
@@ -37,7 +39,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <link rel="stylesheet" type="text/css" href="registerStyles.css">
         <title>BibTex</title>
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"><?php echo '</script'; ?>
+ src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"><?php echo '</script'; ?>
 >
         <?php echo '<script'; ?>
  src="lib/joequery-Stupid-Table-Plugin-5cb0c4d/stupidtable.js?dev"><?php echo '</script'; ?>
@@ -62,13 +64,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 });
             });
             
-            $("#simpleTable").stupidtable();
+            $(function(){
+                $("table").stupidtable();
+            });
+            
         <?php echo '</script'; ?>
 >
     </head>
     <body>
         <div id="header" >
-            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a></span>
+            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a>&nbsp;|&nbsp;<span><a href="homeShare.php">Shared Libraries</a></span>
             <span class="right"><a href="upDateDetails.php"><?php echo $_smarty_tpl->tpl_vars['user_name']->value;?>
 </a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
@@ -96,6 +101,50 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <form action="home.php" method="get">
                         <label for='changeLibrary'>Change Library:
                             <select name='libID'>
+                                <option value="all" <?php if (!isset($_GET['libID'])) {?>selected="selected"<?php }?>>All libraries</option>
+                                <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['libraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
+$_smarty_tpl->tpl_vars['row']->_loop = true;
+?>
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value[0];?>
+"<?php if (isset($_GET['libID'])&&$_GET['libID']==$_smarty_tpl->tpl_vars['row']->value[0]) {?>selected="selected"<?php }?>><?php echo $_smarty_tpl->tpl_vars['row']->value[1];?>
+</option>
+                                <?php } ?>
+                            </select>
+                        </label>
+                        </br>
+                        </br>
+                        <input type='submit' class='submit right' name='action' value='Change Library'>
+                    </form>
+                            </br></br>
+                    <form action="home.php" method="get">
+                        <label>
+                            Library is shared with:</br>
+                            <select name="selectSharedUser" class="selectSharedUser" multiple="multiple" width="15">
+                                <?php  $_smarty_tpl->tpl_vars['sharedUser'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['sharedUser']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['sharedUsers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['sharedUser']->key => $_smarty_tpl->tpl_vars['sharedUser']->value) {
+$_smarty_tpl->tpl_vars['sharedUser']->_loop = true;
+?><option value="<?php echo $_smarty_tpl->tpl_vars['sharedUser']->value['id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['sharedUser']->value['sharedUser'];?>
+</option><?php } ?>
+                            </select>
+                        </label>
+                        </br>
+                        <input type="hidden" name="libID" value="<?php echo $_GET['libID'];?>
+"/>
+                        <input type='submit' class='submit right' name='action' value='Remove SharedUser'/>
+                    </form>
+                </div>
+                </br>
+                <hr>
+                
+                <div class="controlsList">
+                    <form action='home.php'method='get'>
+                        <p>
+                            <label for='search'>Search Libraries:</label>
+                            <select name='libID'>
                                 <option value="all" selected="selected">All libraries</option>
                                 <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['libraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -107,19 +156,6 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 </option>
                                 <?php } ?>
                             </select>
-                        </label>
-                        </br>
-                        </br>
-                        <input type='submit' class='submit right' name='action' value='Change Library'>
-                    </form>
-                </div>
-                </br>
-                <hr>
-                
-                <div class="controlsList">
-                    <form action='home.php'method='get'>
-                        <p>
-                            <label for='search'>Search Libraries:</label></br>
                             <p>Author name</p><input type='text' name='searchAuthor' id='search'>
                             <p>Title</p><input type='text' name='searchTitle' id='search'>
                             <p>Year</p><input type='text' name='searchYear' id='search'>
@@ -135,7 +171,7 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                 
                 <div class="controlsList">
                     <form action="home.php" method="get">
-                        <label for='changeLibrary'>Delete Library:
+                        <label for='deleteLibrary'>Delete Library:
                             <select name='libID'>
                                 <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['deleteableLibraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -183,18 +219,47 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                     </br>
                     <hr>
                 </div>
+                            
+                <div class="controlsList">
+                    <form action='home.php'method='get'>
+                        <p>
+                            <label for='shareWith'>Share library: 
+                                <select name='libID' >
+                                    <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['deleteableLibraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
+$_smarty_tpl->tpl_vars['row']->_loop = true;
+?>
+                                        <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value[0];?>
+"<?php if ($_smarty_tpl->tpl_vars['row']->value[1]=='unfiled') {?>selected='selected'<?php }?>><?php echo $_smarty_tpl->tpl_vars['row']->value[1];?>
+</option>
+                                    <?php } ?>
+                                </select><input teype='text' name='shareEmail' id='shareEmail'></label></br>
+                        </p>
+                        <p>    
+                            <input type='submit' class='submit right' name='action' value='Share Library' />
+                        </p>
+
+                    </form>
+                    </br>
+                    </br>
+                    <hr>
+                </div>
+                            
             </div>
             
-            
+            <!--                   END OF THE SIDEBAR ELEMENTS!                   -->
+                            
             <div id="mainContent">
                 
-                <form action='home.php' method="get" class="left">
-                    <input type="submit" class="submit" name="action" value="Empty Trash">
-                </form>
                 
                 
                 <form action="home.php" method="get">
-                        <div id='dropdownCenter'><select name='libID' class="right">
+                    
+                    <div id='dropdownCenter right'>
+                        <input type="submit" class="submit" name="action" value="Empty Trash">
+                        <input type='submit' class='submit' name='action' value='Move To'>
+                        <select name='libID' >
                             <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['libraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
@@ -204,26 +269,22 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
 "<?php if ($_smarty_tpl->tpl_vars['row']->value[1]=='unfiled') {?>selected='selected'<?php }?>><?php echo $_smarty_tpl->tpl_vars['row']->value[1];?>
 </option>
                             <?php } ?>
-                        </select></div>
-                    <input type='submit' class='right submit' name='action' value='Move To'>
+                        </select>
+                        
+                    </div>
+                    
+                    </br></br>
+                    
                     <table>
                         <thead>
-                        <tr class='tableHeader'>
-                            <th>All</th>
-                            <th>Author</th>
-                            <th>Title</th>
-                            <th>year</th>
-                            <th>library</th>
-                            <th>url</th>
-                        </tr>
-                        <tr class='tableHeader'>
-                            <th><input type='checkbox' class='selectAll left' name='selectAll' onChange='selectALL(this)'></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
+                            <tr class='tableHeader'>
+                                <th>All<input type='checkbox' class='selectAll left' name='selectAll' onChange='selectALL(this);'></th>
+                                <th data-sort="string">Author</th>
+                                <th data-sort="string">Title</th>
+                                <th data-sort="string">year</th>
+                                <th>library</th>
+                                <th>url</th>
+                            </tr>
                         </thead>
                         <tbody>
                         <?php  $_smarty_tpl->tpl_vars['reference'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['reference']->_loop = false;
@@ -252,13 +313,18 @@ $_smarty_tpl->tpl_vars['reference']->_loop = true;
                         <?php } ?>
                         </tbody>
                     </table>
-                </form>
+                 </form>
+                 
+                 <hr>       
+             
+                        <!--End of the main content of the website! -->
             </div>
             
-            
+              
         </div>
         
-        
+                   
+    
     </body>
 </html>
 

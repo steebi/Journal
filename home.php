@@ -33,7 +33,7 @@
                 $references = filterreferenceByLibrary($mail, $_GET['libID']);
                 break;
             case 'Search Libraries':
-                $references = searchLibraries($mail, $_GET['searchTitle'], $_GET['searchAuthor'], $_GET['searchYear']);
+                $references = searchLibraries($mail, $_GET['searchTitle'], $_GET['searchAuthor'], $_GET['searchYear'], $_GET['libID']);
                 break;
             case 'Move To':
                 moveSelectedToLibrary($mail, $_GET['libID'], $_GET['referenceID']);
@@ -49,7 +49,20 @@
                 break;
             case 'Rename Library':
                 renameLibrary($_GET['libID'], $_GET['renameLib']);
-                //header("Location: home.php");
+                header("Location: home.php");
+                break;
+            case 'Share Library':
+                shareLibrary($_GET['libID'], $_GET['shareEmail'], $mail);
+                if(isset($_SESSION['error'])){
+                    header("Location: error.php");
+                }   else{
+                    header("Location: home.php");
+                }
+                break;
+            case 'Remove SharedUser':
+                removeSharedUser($_GET['selectSharedUser']);
+                $references = filterreferenceByLibrary($mail, $_GET['libID']);
+                header("Location: home.php?libID=".$_GET['libID']."&action=Change+Library");
                 break;
         }
         
@@ -61,14 +74,19 @@
     //This function is to populate the list of all libraries for the sidebar
     $libraries = returnLibraries($mail);
     $delLib = returnDelLib($mail);
-    
-    //print_r($references);
+    if(isset($_GET['libID'])){
+        $sharedUsers = returnSharedUsers($mail, $_GET['libID']);
+    }   else{
+        $sharedUsers = NULL;
+    }
+    //if the user has selected a library then we will populate the shared user select box
     
     $template = new Smarty();
 
     //this assigns variables to the template dynamically. So the templates are brought in in the Smarty object and these 3 statements replace variables in the template with these values 
     $template->assign("user_email", $mail);
     $template->assign("user_name", $userName);
+    $template->assign("sharedUsers", $sharedUsers);
     $template->assign("libraries", $libraries);
     $template->assign("deleteableLibraries", $delLib);
     $template->assign("references", $references);

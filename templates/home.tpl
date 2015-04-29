@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="registerStyles.css">
         <title>BibTex</title>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="lib/joequery-Stupid-Table-Plugin-5cb0c4d/stupidtable.js?dev"></script>
         <script language="JavaScript">
             /*
@@ -26,12 +26,15 @@
                 });
             });
             
-            $("#simpleTable").stupidtable();
+            $(function(){
+                $("table").stupidtable();
+            });
+            
         </script>
     </head>
     <body>
         <div id="header" >
-            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a></span>
+            <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a>&nbsp;|&nbsp;<span><a href="homeShare.php">Shared Libraries</a></span>
             <span class="right"><a href="upDateDetails.php">{$user_name}</a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
        
@@ -58,15 +61,27 @@
                     <form action="home.php" method="get">
                         <label for='changeLibrary'>Change Library:
                             <select name='libID'>
-                                <option value="all" selected="selected">All libraries</option>
+                                <option value="all" {if !isset($smarty.get.libID)}selected="selected"{/if}>All libraries</option>
                                 {foreach from=$libraries item=row}
-                                    <option value="{$row.0}">{$row.1}</option>
+                                    <option value="{$row.0}"{if isset($smarty.get.libID)and $smarty.get.libID eq $row.0}selected="selected"{/if}>{$row.1}</option>
                                 {/foreach}
                             </select>
                         </label>
                         </br>
                         </br>
                         <input type='submit' class='submit right' name='action' value='Change Library'>
+                    </form>
+                            </br></br>
+                    <form action="home.php" method="get">
+                        <label>
+                            Library is shared with:</br>
+                            <select name="selectSharedUser" class="selectSharedUser" multiple="multiple" width="15">
+                                {foreach from=$sharedUsers item=sharedUser}<option value="{$sharedUser.id}">{$sharedUser.sharedUser}</option>{/foreach}
+                            </select>
+                        </label>
+                        </br>
+                        <input type="hidden" name="libID" value="{$smarty.get.libID}"/>
+                        <input type='submit' class='submit right' name='action' value='Remove SharedUser'/>
                     </form>
                 </div>
                 </br>
@@ -75,7 +90,13 @@
                 <div class="controlsList">
                     <form action='home.php'method='get'>
                         <p>
-                            <label for='search'>Search Libraries:</label></br>
+                            <label for='search'>Search Libraries:</label>
+                            <select name='libID'>
+                                <option value="all" selected="selected">All libraries</option>
+                                {foreach from=$libraries item=row}
+                                    <option value="{$row.0}">{$row.1}</option>
+                                {/foreach}
+                            </select>
                             <p>Author name</p><input type='text' name='searchAuthor' id='search'>
                             <p>Title</p><input type='text' name='searchTitle' id='search'>
                             <p>Year</p><input type='text' name='searchYear' id='search'>
@@ -91,7 +112,7 @@
                 
                 <div class="controlsList">
                     <form action="home.php" method="get">
-                        <label for='changeLibrary'>Delete Library:
+                        <label for='deleteLibrary'>Delete Library:
                             <select name='libID'>
                                 {foreach from=$deleteableLibraries item=row}
                                     <option value="{$row.0}">{$row.1}</option>
@@ -127,41 +148,60 @@
                     </br>
                     <hr>
                 </div>
+                            
+                <div class="controlsList">
+                    <form action='home.php'method='get'>
+                        <p>
+                            <label for='shareWith'>Share library: 
+                                <select name='libID' >
+                                    {foreach from=$deleteableLibraries item=row}
+                                        <option value="{$row.0}"{if $row.1 eq 'unfiled'}selected='selected'{/if}>{$row.1}</option>
+                                    {/foreach}
+                                </select><input teype='text' name='shareEmail' id='shareEmail'></label></br>
+                        </p>
+                        <p>    
+                            <input type='submit' class='submit right' name='action' value='Share Library' />
+                        </p>
+
+                    </form>
+                    </br>
+                    </br>
+                    <hr>
+                </div>
+                            
             </div>
             
-            
+            <!--                   END OF THE SIDEBAR ELEMENTS!                   -->
+                            
             <div id="mainContent">
                 
-                <form action='home.php' method="get" class="left">
-                    <input type="submit" class="submit" name="action" value="Empty Trash">
-                </form>
                 
                 
                 <form action="home.php" method="get">
-                        <div id='dropdownCenter'><select name='libID' class="right">
+                    
+                    <div id='dropdownCenter right'>
+                        <input type="submit" class="submit" name="action" value="Empty Trash">
+                        <input type='submit' class='submit' name='action' value='Move To'>
+                        <select name='libID' >
                             {foreach from=$libraries item=row}
                                 <option value="{$row.0}"{if $row.1 eq 'unfiled'}selected='selected'{/if}>{$row.1}</option>
                             {/foreach}
-                        </select></div>
-                    <input type='submit' class='right submit' name='action' value='Move To'>
+                        </select>
+                        
+                    </div>
+                    
+                    </br></br>
+                    
                     <table>
                         <thead>
-                        <tr class='tableHeader'>
-                            <th>All</th>
-                            <th>Author</th>
-                            <th>Title</th>
-                            <th>year</th>
-                            <th>library</th>
-                            <th>url</th>
-                        </tr>
-                        <tr class='tableHeader'>
-                            <th><input type='checkbox' class='selectAll left' name='selectAll' onChange='selectALL(this)'></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
+                            <tr class='tableHeader'>
+                                <th>All<input type='checkbox' class='selectAll left' name='selectAll' onChange='selectALL(this);'></th>
+                                <th data-sort="string">Author</th>
+                                <th data-sort="string">Title</th>
+                                <th data-sort="string">year</th>
+                                <th>library</th>
+                                <th>url</th>
+                            </tr>
                         </thead>
                         <tbody>
                         {foreach from=$references item=reference}
@@ -176,13 +216,18 @@
                         {/foreach}
                         </tbody>
                     </table>
-                </form>
+                 </form>
+                 
+                 <hr>       
+             
+                        <!--End of the main content of the website! -->
             </div>
             
-            
+              
         </div>
         
-        
+                   
+    
     </body>
 </html>
 

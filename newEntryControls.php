@@ -8,6 +8,7 @@
     <body>
         <?php
             session_start();
+            
             require_once 'database.php';
             if($_SESSION['user_email'] == ''){
                 header("Location: index.php");
@@ -50,7 +51,7 @@
                 exit;
             }
             
-           
+            
             //if there was no error then insert into the database
             foreach($_POST as $key => $value){
                 if($key === "submit"){
@@ -66,7 +67,6 @@
             //and bind the parameters
             try{
                 $insertString = "INSERT INTO reference (".$elements.") VALUES (".$elementsBindVar.");";
-                //echo "$insertString";
                 $insertReference = $connection->prepare($insertString);
                 //this cycles through the data in post it takes the keys and values 
                 //from the array passed by post and binds each parameter according 

@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS reference(
     id INT UNSIGNED AUTO_INCREMENT UNIQUE,
     title VARCHAR(100) NOT NULL,
     author VARCHAR(100) NOT NULL,
-    publishYear YEAR NOT NULL,
+    publishYear INT UNSIGNED NOT NULL,
     url VARCHAR(255),
     publishMonth INT,
     abstract VARCHAR(100),
