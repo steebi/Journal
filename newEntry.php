@@ -59,14 +59,14 @@
                     <label for='title'>
                         *Title:
                     </label></br>
-                    <input name = 'title' type='text' id='username' class='inputFullWidth<?php if(isset($_SESSION['error']['title'])){echo" inputError";}?>' />
+                    <input name = 'title' type='text' id='username' class='inputFullWidth<?php if(isset($_SESSION['error']['title'])){echo" inputError";}?>' required/>
                     
                 </p>
                 <p>
                     <label for='author'>
                         *Author:
                     </label></br>
-                    <input name = 'author' type='text' id='author' class='inputFullWidth<?php if(isset($_SESSION['error']['author'])){echo" inputError";}?>' />
+                    <input name = 'author' type='text' id='author' class='inputFullWidth<?php if(isset($_SESSION['error']['author'])){echo" inputError";}?>' required/>
                 </p>
                 <p>
                     <label for='Library'>

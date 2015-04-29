@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="registerStyles.css?relaod">
+        <script type="text/javascript" language="javascript" src="javaScript/validationScripts.js"></script>
         <title>BibTex</title>
     </head>
     <body>
@@ -86,11 +87,11 @@
             <form action="index.php" method="post" >
                 <p>
                     <label for="email">E-mail:</label></br>
-                    <input name="email" type="text" id="email" size="30"/>
+                    <input name="email" type="text" id="email" size="30" <?php if(isset($_SESSION['error']['login'])){echo "class= \"inputError\"";} ?> />
                 </p>
                 <p>
                     <label for="password">Password:</label></br>
-                    <input name="password" type="password" id="password" size="30"/>
+                    <input name="password" type="password" id="password" size="30" <?php if(isset($_SESSION['error']['login'])){echo "class= \"inputError\"";} ?> />
                 </p>
                 <div class="errors">
                     <?php
@@ -102,8 +103,9 @@
                         }
                     ?>
                 </div>
+                <div id="jsErrors" class="errors"></div>
                 <p>
-                    <input class="submit" name="submit" type="submit" value="Submit"/>
+                    <input class="submit" name="submit" type="submit" value="Log In" onsubmit="checkLogIn()"/>
                 </p>
            </form>
         </div>
