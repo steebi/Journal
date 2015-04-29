@@ -87,11 +87,11 @@
             <form action="index.php" method="post" >
                 <p>
                     <label for="email">E-mail:</label></br>
-                    <input name="email" type="text" id="email" size="30" <?php if(isset($_SESSION['error']['login'])){echo "class= \"inputError\"";} ?> />
+                    <input name="email" type="text" id="email" size="30" <?php if(isset($_SESSION['error']['login'])){echo "class= \"inputError\"";} ?> required/>
                 </p>
                 <p>
                     <label for="password">Password:</label></br>
-                    <input name="password" type="password" id="password" size="30" <?php if(isset($_SESSION['error']['login'])){echo "class= \"inputError\"";} ?> />
+                    <input name="password" type="password" id="password" size="30" <?php if(isset($_SESSION['error']['login'])){echo "class= \"inputError\"";} ?> required/>
                 </p>
                 <div class="errors">
                     <?php

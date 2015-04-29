@@ -31,19 +31,19 @@
             <form action="registerControls.php" method='post'>
                 <p>
                     <label for='username'>User name:</label></br>
-                    <input name = 'username' type='text' id='username'size='40'/>
+                    <input name = 'username' type='text' id='username'size='40' required/>
                 </p>
                 <p>
                     <label for='email'>Email address:</label></br>
-                    <input name = 'email' type='text' id='email'size='40'/>
+                    <input name = 'email' type='text' id='email'size='40' required/>
                 </p>
                 <p>
                     <label for='password'>New Password:</label></br>
-                    <input name = 'password' type='password' id='password'size='40'/>
+                    <input name = 'password' type='password' id='password'size='40' required/>
                 </p>
                 <p>
                     <label for='passwordConfirm'>Confirm Password:</label></br>
-                    <input name = 'passwordConfirm' type='password' id='passwordConfirm'size='40'/>
+                    <input name = 'passwordConfirm' type='password' id='passwordConfirm'size='40' required/>
                 </p>
                 <div class="errors">
                     <?php
