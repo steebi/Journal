@@ -13,7 +13,7 @@ and open the template in the editor.
     <body>
         <?php
             session_start();
-            //see if the user is already logged in. If they are redirect to home.php
+            //see if the user is already logged in. If they are not redirect to login page
             if(!isset($_SESSION['user_email'])){
                 header("Location: index.php");
                 exit;
@@ -36,7 +36,7 @@ and open the template in the editor.
                         echo '<p>'.$_SESSION['error']['shareLib'].'</p>';
                     }
 
-                    //unset the error session variable
+                    //unset the error session variable so that it is not stored and causes issues later on
                     unset($_SESSION['error']);
                     }
                 ?>

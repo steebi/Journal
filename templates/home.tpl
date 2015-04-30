@@ -25,7 +25,10 @@
                     }
                 });
             });
-            
+            /*
+             * This calls on a library downloaded from the internet, that allows a table to be sorted
+             * by giving the table elements a class name
+             */
             $(function(){
                 $("table").stupidtable();
             });
@@ -61,6 +64,8 @@
                     <form action="home.php" method="get">
                         <label for='changeLibrary'>Change Library:
                             <select name='libID'>
+                                <!--If there is a library set in the $_GET variable then select that library in the library list-->
+                                <!--Populate the library options list with libraries passed to the smarty template-->
                                 <option value="all" {if !isset($smarty.get.libID)}selected="selected"{/if}>All libraries</option>
                                 {foreach from=$libraries item=row}
                                     <option value="{$row.0}"{if isset($smarty.get.libID)and $smarty.get.libID eq $row.0}selected="selected"{/if}>{$row.1}</option>
@@ -76,6 +81,7 @@
                         <label>
                             Library is shared with:</br>
                             <select name="selectSharedUser" class="selectSharedUser" multiple="multiple" width="15">
+                                <!--Populate the shared user list if there are shared users passed to the template-->
                                 {foreach from=$sharedUsers item=sharedUser}<option value="{$sharedUser.id}">{$sharedUser.sharedUser}</option>{/foreach}
                             </select>
                         </label>
@@ -93,6 +99,7 @@
                             <label for='search'>Search Libraries:</label>
                             <select name='libID'>
                                 <option value="all" selected="selected">All libraries</option>
+                                <!--Fills the option list with the libraries that were passed to the smarty template-->
                                 {foreach from=$libraries item=row}
                                     <option value="{$row.0}">{$row.1}</option>
                                 {/foreach}
@@ -114,6 +121,7 @@
                     <form action="home.php" method="get">
                         <label for='deleteLibrary'>Delete Library:
                             <select name='libID'>
+                                <!--List the libraries that are deleteable, passed to the smarty template-->
                                 {foreach from=$deleteableLibraries item=row}
                                     <option value="{$row.0}">{$row.1}</option>
                                 {/foreach}
@@ -194,6 +202,7 @@
                     
                     <table>
                         <thead>
+                            <!--These are the library entries in the database, they are passed to the smarty template-->
                             <tr class='tableHeader'>
                                 <th>All<input type='checkbox' class='selectAll left' name='selectAll' onChange='selectALL(this);'></th>
                                 <th data-sort="string">Author</th>
@@ -204,6 +213,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!--Cycles through the array of passed libraries and populates them in the list-->
                         {foreach from=$references item=reference}
                             <tr class='hover'>
                                 <td><input type='checkbox' class='referencesCheckBoxes' name='referenceID[]' value='{$reference['id']}'></td>

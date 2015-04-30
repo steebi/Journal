@@ -176,9 +176,9 @@ textarea{
         text-align: center;
     }
 
-    /*
-        This sets the sidebar to be to the left always
-    */
+/*
+    This sets the sidebar to be to the left always
+*/
 #sidebar {
     border-right: 1px solid lightgrey; 
     margin-left: 10px;
@@ -201,19 +201,22 @@ textarea{
     background-color: blue;
 }
 
+/*
+    Makes the check box display inline
+*/
 .checkBoxInline{
     display:block;
 }
-
+/*
+    Sets the background colour of the table heads
+*/
 .tableHeader{
     background-color:#D3D3D3;
 }
 
-tr{
-    border: 3px solid black;
-    padding: 5px;
-}
-
+/*
+    Sets the links to have no decoration
+*/
 td a {
     color:black;
     text-decoration: none;
@@ -221,12 +224,16 @@ td a {
     width:100%;
     display:block;
 }
-
+/*
+    Changes the colour of the links in the table when they are hovered over
+*/
 tr.hover:hover {
     background-color: #617798;
 }
 
-
+/*
+    Sets the margin of the main content area to be 340px to account for the side bar
+*/
 #mainContent{
     margin-left: 340px;
     margin-top: 30px;
@@ -238,14 +245,17 @@ tr.hover:hover {
     width: 100%;
 }
 
+/*
+    The table elements that can be sorted will have a pointer curser when the mouse is
+    put over them so it is more clear they can be clicked
+*/
 th[data-sort]{
       cursor:pointer;
-    }
-    
-    .selectSharedUser{
-        width:250px;
-    }
-    
-    select{
-        border: 1px solid black;
-    }
+}
+
+/*
+    Sets the width of the box for selecting shared users width 
+*/
+.selectSharedUser{
+    width:250px;
+}

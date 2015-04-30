@@ -25,7 +25,10 @@
                     }
                 });
             });
-            
+            /*
+             * This calls on a library downloaded from the internet, that allows a table to be sorted
+             * by giving the table elements a class name
+             */
             $(function(){
                 $("table").stupidtable();
             });

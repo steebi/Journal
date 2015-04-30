@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-29 16:37:31
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-30 20:07:54
          compiled from ".\templates\home.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:190815539048734b6b6-33638628%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'eac3cf626f39945169284be9eb498f874ada9b8e' => 
     array (
       0 => '.\\templates\\home.tpl',
-      1 => 1430318242,
+      1 => 1430416388,
       2 => 'file',
     ),
   ),
@@ -63,7 +63,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     }
                 });
             });
-            
+            /*
+             * This calls on a library downloaded from the internet, that allows a table to be sorted
+             * by giving the table elements a class name
+             */
             $(function(){
                 $("table").stupidtable();
             });
@@ -101,6 +104,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <form action="home.php" method="get">
                         <label for='changeLibrary'>Change Library:
                             <select name='libID'>
+                                <!--If there is a library set in the $_GET variable then select that library in the library list-->
+                                <!--Populate the library options list with libraries passed to the smarty template-->
                                 <option value="all" <?php if (!isset($_GET['libID'])) {?>selected="selected"<?php }?>>All libraries</option>
                                 <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['libraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -122,6 +127,7 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                         <label>
                             Library is shared with:</br>
                             <select name="selectSharedUser" class="selectSharedUser" multiple="multiple" width="15">
+                                <!--Populate the shared user list if there are shared users passed to the template-->
                                 <?php  $_smarty_tpl->tpl_vars['sharedUser'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['sharedUser']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['sharedUsers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['sharedUser']->key => $_smarty_tpl->tpl_vars['sharedUser']->value) {
@@ -146,6 +152,7 @@ $_smarty_tpl->tpl_vars['sharedUser']->_loop = true;
                             <label for='search'>Search Libraries:</label>
                             <select name='libID'>
                                 <option value="all" selected="selected">All libraries</option>
+                                <!--Fills the option list with the libraries that were passed to the smarty template-->
                                 <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['libraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
@@ -173,6 +180,7 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                     <form action="home.php" method="get">
                         <label for='deleteLibrary'>Delete Library:
                             <select name='libID'>
+                                <!--List the libraries that are deleteable, passed to the smarty template-->
                                 <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['deleteableLibraries']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
@@ -277,6 +285,7 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                     
                     <table>
                         <thead>
+                            <!--These are the library entries in the database, they are passed to the smarty template-->
                             <tr class='tableHeader'>
                                 <th>All<input type='checkbox' class='selectAll left' name='selectAll' onChange='selectALL(this);'></th>
                                 <th data-sort="string">Author</th>
@@ -287,6 +296,7 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                             </tr>
                         </thead>
                         <tbody>
+                            <!--Cycles through the array of passed libraries and populates them in the list-->
                         <?php  $_smarty_tpl->tpl_vars['reference'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['reference']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['references']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['reference']->key => $_smarty_tpl->tpl_vars['reference']->value) {

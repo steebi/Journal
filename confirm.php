@@ -11,14 +11,17 @@
             
             session_start();
             //see if there is a session variable with logged in data. If there is redirect to home.php
+            //as when someone is already logged in they should be redirected to the home page
             include('database.php');
             if(isset($_SESSION['user_email'])){
                 header("Location: home.php");
                 exit;
             }
-        
+            
+            //include the connection information for the database
             include("database.php");
-            //take the register code 
+            //take the registration code and if it is the same as the one stored in the database then 
+            //set the registration code to null, indicating this is a confirmed user
             $RegCode = filter_input(INPUT_GET, 'RegCode');
             $setRegCode = $connection->prepare("UPDATE user SET reg_code=NULL WHERE reg_code=:reg_code");
             $setRegCode->bindParam(':reg_code', $RegCode);

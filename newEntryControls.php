@@ -48,8 +48,9 @@
                     $inputError = TRUE;
                 }
             }
-            //all these dates are the important ones, if they are valid then we 
-            //can inser them into the database otherwise return an error to the user
+            //all these data fields are the important ones, if they are valid then we 
+            //can insert them into the database otherwise return an error to the user
+            //and redirect them to the previous page
             
             if($inputError){
                 header("Location: newEntry.php");

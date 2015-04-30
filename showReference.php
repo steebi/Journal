@@ -23,8 +23,10 @@ and open the template in the editor.
             $userName = $_SESSION['user_name'];
             $mail = $_SESSION['user_email'];
             
+            //retrieve the libraries id and 
             $libID = $_GET['libID'];
             
+            //this returns the specified reference. The libID value should be refID, but I forgot to change it
             $reference = returnReference($mail, $libID);
             
             //take input from get and load the correct page for that
@@ -35,10 +37,10 @@ and open the template in the editor.
             <span><a href="home.php">Home</a></span>&nbsp;|&nbsp;<span><a href="newEntry.php">New Entry</a>&nbsp;|&nbsp;<span><a href="homeShare.php">Shared Libraries</a></span>
             <span class="right"><a href="upDateDetails.php"><?php echo "$userName"?></a>&nbsp;|&nbsp;<a href="logout.php">Logout</a></span>
         </div>
-        
+        <!--Each of the references will be disabled if the logged in user's email does not match the email of the owner, so they are not allowed to change any of the content-->
         <div id = "insertReference" class = "newReferenceForm">
             <h1>View reference</h1>
-            <form action="showReferenceControls.php?refID=<?php $libIDPass = $_GET['libID']; echo "$libIDPass\""; ?> method='post'>
+            <form action="showReferenceControls.php?refID=<?php $libIDPass = $_GET['libID']; echo "$libIDPass"; ?>" method='post'>
                 <p>
                     <label for='title'>
                         *Title:
