@@ -1,4 +1,8 @@
 <?php
+
+    echo "GOT HERE!";
+    
+
    if ($_POST['formData']){
     include 'services/config.php';
      // Prevent caching.
