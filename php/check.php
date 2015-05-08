@@ -1,5 +1,4 @@
 <?php
-    echo "Here first!";
    if ($_POST['formData']){
        
        echo "HERE";
