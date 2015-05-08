@@ -1,6 +1,8 @@
 <?php
-
+    echo "Here first!";
    if ($_POST['formData']){
+       
+       echo "HERE";
     //include 'services/config.php';
      // Prevent caching.
      header('Cache-Control: no-cache, must-revalidate');
